@@ -203,11 +203,15 @@ main::before{
    sobre la página y pasa a ser una pieza que flota encima. */
 .barra.encogida{
   width:min(820px,calc(100% - 2rem));
-  top:.85rem;padding:.42rem .42rem .42rem 1.05rem;
-  border-radius:22px;
+  /* Notch, no isla: cuelga del borde superior, así que no se separa de
+     arriba y solo redondea por abajo. */
+  top:0;padding:.5rem .42rem .55rem 1.05rem;
+  border-radius:0 0 22px 22px;
   background:#0A0C10;
+  /* Neón suave: un filo de un píxel y un halo corto hacia abajo. */
   box-shadow:
-    inset 0 0 0 1px rgb(255 255 255 / .07),
+    inset 0 0 0 1px rgb(232 163 61 / .22),
+    0 1px 18px -5px rgb(232 163 61 / .3),
     0 10px 34px -12px rgb(0 0 0 / .85);
   backdrop-filter:none;
   gap:1.4rem;
@@ -225,6 +229,31 @@ main::before{
   padding:.6rem 1.15rem;border-radius:15px;font-weight:600;font-size:13.5px;
 }
 .barra.encogida .barra-cta:hover{background:#fff}
+/* El embudo: a cada lado del notch, un cuadrado del mismo negro al que se
+   le recorta un cuarto de círculo. La curva sale cóncava y el notch parece
+   tallado en el borde superior en vez de pegado encima. */
+.barra::before,
+.barra::after{
+  content:"";position:absolute;top:0;
+  width:20px;height:20px;
+  opacity:0;pointer-events:none;
+  transition:opacity .3s ease;
+}
+.barra.encogida::before,
+.barra.encogida::after{opacity:1}
+.barra::before{
+  left:-20px;
+  background:radial-gradient(circle at 0 100%, transparent 19.4px, rgb(232 163 61 / .3) 20.4px, #0A0C10 21px);
+  -webkit-mask-image:radial-gradient(circle at 0 100%, transparent 19.5px, #000 20px);
+  mask-image:radial-gradient(circle at 0 100%, transparent 19.5px, #000 20px);
+}
+.barra::after{
+  right:-20px;
+  background:radial-gradient(circle at 100% 100%, transparent 19.4px, rgb(232 163 61 / .3) 20.4px, #0A0C10 21px);
+  -webkit-mask-image:radial-gradient(circle at 100% 100%, transparent 19.5px, #000 20px);
+  mask-image:radial-gradient(circle at 100% 100%, transparent 19.5px, #000 20px);
+}
+
 .barra-marca{
   display:inline-flex;align-items:center;gap:9px;
   font-family:var(--f-display);font-size:19px;letter-spacing:.01em;
@@ -712,7 +741,7 @@ footer p{margin:0;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;
 </nav>
 
 <header class="hero">
-  <!-- El src lo decide el script según el ancho: 4 MB en escritorio, 0,7 MB en móvil. -->
+  <!-- El src lo decide el script según el ancho: 1 MB en escritorio, 0,3 MB en móvil. -->
   <video id="fuente" class="hero-video" poster="media/taller-poster.jpg"
          muted loop playsinline autoplay preload="auto" aria-hidden="true"></video>
   <div class="hero-vela"></div>
@@ -994,7 +1023,7 @@ new IntersectionObserver(([e]) => {
 }).observe(centinela);
 
 /* ── Hero: elegir la copia del vídeo según el ancho ────────────────
-   Cargar 4 MB en un móvil con datos no compensa: a ese tamaño de pantalla
+   Aun comprimido, el de escritorio pesa el triple: a ese tamaño de pantalla
    la copia de 768 px es indistinguible. */
 const video = document.getElementById('fuente');
 video.src = innerWidth < 900 ? 'media/taller-movil.mp4' : 'media/taller.mp4';
