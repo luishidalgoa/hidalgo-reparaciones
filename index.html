@@ -235,7 +235,10 @@ main::before{
 .barra::before,
 .barra::after{
   content:"";position:absolute;top:0;
-  width:20px;height:20px;
+  /* 22 y no 20: los 2 px de más se montan sobre el notch y tapan el tramo
+     alto de su filo vertical, que si no queda como una segunda línea junto
+     a la curva. */
+  width:22px;height:20px;
   opacity:0;pointer-events:none;
   transition:opacity .3s ease;
 }
