@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hidalgo · Reparaciones en Córdoba</title>
+<meta name="description" content="Arreglo móviles, ordenadores y consolas en Córdoba. Drift de mandos, pantallas, baterías, limpieza y pasta térmica. Precio cerrado antes de empezar.">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hidalgo · Reparaciones en Córdoba">
+<meta property="og:description" content="Móviles, ordenadores y consolas. Te digo lo que cuesta antes de tocar nada.">
+<meta property="og:image" content="media/taller-poster.jpg">
+<meta property="og:locale" content="es_ES">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><rect width='48' height='48' rx='9' fill='%23E8A33D'/><path fill='%2317130B' d='M6 8h15v3.5h-4.5v9.75h15V11.5H27V8h15v3.5h-4.5v25H42V40H27v-3.5h4.5v-11.5h-15v11.5H21V40H6v-3.5h4.5v-25H6z'/></svg>">
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org","@type":"LocalBusiness",
+  "name":"Hidalgo — Reparaciones",
+  "description":"Reparación de móviles, ordenadores y consolas en Córdoba.",
+  "email":"luishidalgoa@outlook.es","priceRange":"20 € - 400 €",
+  "areaServed":{"@type":"City","name":"Córdoba","address":{"@type":"PostalAddress","addressLocality":"Córdoba","addressRegion":"Andalucía","addressCountry":"ES"}}
+}
+</script>
+
+<style>
+/* ══ Tokens ══════════════════════════════════════════════
+   Paleta sacada del propio vídeo: negro de taller sin luz,
+   ámbar de la lámpara de banco, violeta del neón japonés.  */
+:root{
+  --void:#08090C;
+  --panel:#101218;
+  --edge:#1E212A;
+  --ink:#EAE7E1;
+  --ink-2:#9A968E;
+  --ink-3:#5E5B57;
+  --amber:#E8A33D;
+  --amber-deep:#8A5D1C;
+  --amber-hi:#F3B457;      /* hover */
+  --on-amber:#17130B;      /* texto sobre ámbar */
+  --neon:#A855C8;
+
+  --f-display:"Instrument Serif",Georgia,"Times New Roman",serif;
+  --f-body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;
+
+  --gutter:clamp(20px,4.5vw,52px);
+  --col:min(1180px,100% - var(--gutter) * 2);
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+
+body{
+  margin:0;background:var(--void);color:var(--ink);
+  font-family:var(--f-body);font-size:17px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+.col{width:var(--col);margin-inline:auto}
+
+/* ══ Fondo: dos capas que vagan (receta de fondos de gradiente) ══
+   Va fijo detrás de toda la página. Los colores están bajados respecto a la
+   receta original porque aquí la base es casi negra y con los suyos el fondo
+   subía tanto que el ámbar de los botones dejaba de destacar. */
+.fondo{position:fixed;inset:0;z-index:0;overflow:hidden;background:var(--void);pointer-events:none}
+.fondo > span{position:absolute;inset:0}
+
+/* El scale(1.07) no es decorativo: al desplazarse, una capa del tamaño justo
+   deja al descubierto una franja donde el color corta en seco. */
+.c1{
+  background:radial-gradient(at 18% 22%, #1E2530 0px, transparent 52%);
+  animation:vagar1 29s ease-in-out 0s infinite alternate;
+}
+@keyframes vagar1{
+  from{transform:scale(1.07) translate(-1.6%, 1.65%)}
+  to  {transform:scale(1.07) translate(1.6%, -1.65%)}
+}
+.c2{
+  background:radial-gradient(at 82% 78%, #141A22 0px, transparent 55%);
+  animation:vagar2 37s ease-in-out -7s infinite alternate;
+}
+@keyframes vagar2{
+  from{transform:scale(1.07) translate(2.1%, -2.1%)}
+  to  {transform:scale(1.07) translate(-2.1%, 2.1%)}
+}
+/* Los periodos son primos entre sí: la combinación tarda horas en repetirse.
+   El retraso negativo arranca la segunda capa por otro punto del recorrido. */
+@media (prefers-reduced-motion: reduce){ .fondo > span{animation:none} }
+
+/* El contenido va por encima del fondo. La barra y el dock ya van a 60. */
+body > header, body > main, body > footer{position:relative;z-index:1}
+
+/* El hero termina en negro puro y el fondo animado arranca bastante más
+   claro: sin esto se ve una línea de corte recta al pasar de uno a otro.
+   La franja funde los 200 primeros píxeles del contenido. */
+main::before{
+  content:"";position:absolute;z-index:-1;
+  top:0;left:0;right:0;height:220px;pointer-events:none;
+  background:linear-gradient(to bottom, var(--void) 0%, rgb(8 9 12 / .6) 38%, transparent 100%);
+}
+
+.tag{
+  font-family:var(--f-mono);font-size:10.5px;font-weight:500;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--ink-2);
+}
+
+/* ══ Barrido metálico (receta: texto con degradado) ══════ */
+.acero{
+  color:transparent;-webkit-text-fill-color:transparent;
+  background-clip:text;-webkit-background-clip:text;
+  background-image:linear-gradient(to right,
+    #b9bec9 0%, #e8ebf0 9%, #c6cbd5 17%, #f6f8fb 31%, #d2d7e0 38%,
+    #aeb4bf 52%, #eef1f5 61%, #c1c6d1 73%, #e2e6ec 84%, #b9bec9 100%);
+  background-size:1600px 100%;background-repeat:repeat;
+  animation:barrer 9s linear infinite;
+}
+@keyframes barrer{ from{background-position-x:0} to{background-position-x:1600px} }
+@media (prefers-reduced-motion: reduce){ .acero{animation:none} }
+
+/* ══ Barra: se encoge al bajar (receta nº3) ══════════════ */
+.centinela{position:absolute;top:0;left:0;height:1px;width:1px}
+.barra{
+  position:fixed;top:0;left:50%;z-index:60;
+  width:100%;transform:translateX(-50%);
+  display:flex;align-items:center;gap:2rem;
+  padding:.7rem var(--gutter);
+  border-radius:0;background:rgb(8 9 12 / 0);
+  transition:width .3s ease, top .3s ease, padding .3s ease,
+             border-radius .3s ease, background-color .3s ease;
+}
+.barra.encogida{
+  width:min(680px,calc(100% - 2rem));
+  top:.9rem;padding:.5rem .5rem .5rem 1.25rem;
+  border-radius:999px;background:rgb(16 18 24 / .78);
+  box-shadow:inset 0 0 0 1px rgb(255 255 255 / .12);
+  backdrop-filter:blur(16px);
+}
+.barra-marca{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:var(--f-display);font-size:19px;letter-spacing:.01em;
+}
+.logo{width:19px;height:19px;flex:none;display:block}
+.barra-nav{display:none;gap:1.6rem;margin-left:auto;font-size:14px;color:var(--ink)}
+.barra-nav a{text-decoration:none;opacity:.82}
+.barra-nav a:hover{opacity:1;color:var(--amber)}
+/* Sobre el vídeo la barra va sin fondo: sin esta sombra los enlaces se
+   pierden en cuanto pasan por encima de la ventana iluminada. */
+.barra:not(.encogida) .barra-marca,
+.barra:not(.encogida) .barra-nav a{text-shadow:0 1px 12px rgb(6 7 9 / .95), 0 0 3px rgb(6 7 9 / .8)}
+.barra-cta{
+  margin-left:auto;font-size:13.5px;font-weight:500;text-decoration:none;
+  padding:.5rem 1.05rem;border-radius:8px;
+  background:var(--amber);color:var(--on-amber);white-space:nowrap;
+}
+.barra.encogida .barra-cta{margin-left:0}
+.barra-cta:hover{background:var(--amber-hi)}
+@media (min-width:900px){ .barra-nav{display:flex} .barra-cta{margin-left:0} }
+@media (max-width:899px){ .barra{display:none} }
+
+/* ══ Hero ════════════════════════════════════════════════ */
+.hero{
+  position:relative;min-height:100svh;
+  display:grid;grid-template-rows:auto 1fr auto;
+  padding:clamp(76px,10vh,104px) var(--gutter) var(--gutter);
+  overflow:hidden;
+}
+/* Encaje por altura: el vídeo llena el alto completo y conserva su
+   proporción. Si sobra ancho, queda fondo a los lados. Deja que escale el
+   navegador, que lo hace por hardware y mejor que un canvas. */
+.hero-video{
+  position:absolute;top:0;left:50%;transform:translateX(-50%);
+  /* Un 12 % de alto de más es exactamente lo que el parallax va a desplazar.
+     Con el alto justo, al bajar el vídeo dejaría una franja vacía arriba. */
+  height:112%;width:auto;max-width:none;
+  z-index:0;display:block;pointer-events:none;
+  will-change:transform;
+}
+/* Dos franjas, no una viñeta. Oscurecer solo donde hay texto deja limpio
+   el centro del plano, que es lo que se quiere enseñar. */
+.hero-vela{
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:
+    linear-gradient(to bottom, rgb(6 7 9 / .92) 0%, rgb(6 7 9 / .55) 46%, transparent 100%) top / 100% 170px no-repeat,
+    linear-gradient(to top, var(--void) 0%, rgb(6 7 9 / .88) 30%, rgb(6 7 9 / .45) 62%, transparent 100%) bottom / 100% 46% no-repeat,
+    /* refuerzo en la esquina de abajo a la izquierda, que es donde caen el
+       titular y la garantía, y donde la escena tiene las herramientas claras */
+    radial-gradient(70% 55% at 6% 100%, rgb(6 7 9 / .92) 0%, rgb(6 7 9 / .6) 45%, transparent 100%);
+}
+/* El vídeo y la vela quedan fuera: si entran aquí reciben la misma
+   especificidad que su propia regla, ganan por orden y tapan el texto. */
+.hero > *:not(.hero-video):not(.hero-vela){position:relative;z-index:2}
+
+.hero-alto{display:flex;justify-content:space-between;align-items:flex-start;gap:24px}
+.hero-claim{text-align:right;line-height:1.6;max-width:19ch}
+.hero .tag,
+.hero-jura,
+.hero-tel{text-shadow:0 1px 14px rgb(6 7 9 / .95), 0 0 4px rgb(6 7 9 / .85)}
+.hero .tag{color:#C9C5BE;font-size:11px}
+.hero-jura,.hero-tel{color:#C9C5BE}
+.hero-medio{display:flex;align-items:center}
+
+.hero-titulo{
+  font-family:var(--f-display);font-weight:400;
+  font-size:clamp(4rem,17vw,11.5rem);
+  line-height:.82;letter-spacing:-.02em;margin:0;
+  /* Con line-height .82 la caja es más corta que los glifos y el descendente
+     de la "g" se sale por abajo, donde lo recorta el overflow del hero.
+     El padding devuelve ese espacio dentro de la caja. */
+  padding-bottom:.22em;
+  /* text-shadow no sirve con background-clip:text (pintaría la sombra
+     sólida sobre el hueco de la letra). drop-shadow sí. */
+  filter:drop-shadow(0 4px 30px rgb(8 9 12 / .95));
+}
+.hero-sub{
+  font-family:var(--f-display);font-style:italic;
+  font-size:clamp(1.15rem,3.4vw,1.9rem);
+  color:#D8D4CD;margin:.5rem 0 0;
+}
+.hero-bajo{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.hero-jura{
+  font-family:var(--f-mono);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;line-height:1.9;color:var(--ink-2);
+}
+.hero-jura b{color:var(--amber);font-weight:500}
+.hero-tel{
+  font-family:var(--f-mono);font-size:11.5px;letter-spacing:.14em;
+  text-decoration:none;white-space:nowrap;
+  padding:8px 14px;border-radius:8px;
+  border:1px solid rgb(255 255 255 / .18);
+  background:rgb(6 7 9 / .55);backdrop-filter:blur(8px);
+}
+.hero-tel:hover{color:var(--amber);border-color:var(--amber-deep)}
+.hero-sub{text-shadow:0 2px 22px rgb(6 7 9 / .95)}
+
+/* ══ Secciones ═══════════════════════════════════════════ */
+section{padding-block:clamp(64px,9vw,112px)}
+.rule{border-top:1px solid var(--edge)}
+.cab{display:flex;align-items:baseline;gap:16px;margin-bottom:36px;flex-wrap:wrap}
+.cab h2{
+  font-family:var(--f-display);font-weight:400;
+  font-size:clamp(1.9rem,4.6vw,2.9rem);
+  line-height:1.05;letter-spacing:-.01em;margin:0;text-wrap:balance;
+}
+.prosa{max-width:56ch;color:var(--ink-2);font-size:1.06rem}
+.prosa strong{color:var(--ink);font-weight:500}
+.prosa + .prosa{margin-top:1.1em}
+
+/* Presentación */
+.quien{display:grid;gap:40px}
+@media (min-width:880px){ .quien{grid-template-columns:1.15fr .85fr;gap:56px;align-items:start} }
+
+/* Tarifas */
+.tarifas{list-style:none;margin:0;padding:0;border-top:1px solid var(--edge)}
+.tar{
+  display:flex;align-items:baseline;gap:14px;
+  padding:20px 0;border-bottom:1px solid var(--edge);
+}
+.tar-n{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);width:24px;flex:none;padding-top:2px}
+.tar-c{flex:1;min-width:0}
+.tar-c b{display:block;font-weight:500;font-size:1.06rem;letter-spacing:-.005em}
+.tar-c span{display:block;color:var(--ink-2);font-size:.92rem;margin-top:4px;max-width:52ch}
+.tar-p{
+  font-family:var(--f-mono);font-size:1rem;font-weight:500;
+  font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--amber);
+}
+.tar-p.tenue{color:var(--ink-2);font-size:.88rem}
+
+.jura{
+  margin-top:30px;padding:22px 24px;
+  border:1px solid var(--amber-deep);border-radius:4px;
+  background:linear-gradient(180deg, rgb(232 163 61 / .07), transparent);
+  display:flex;gap:20px;align-items:center;flex-wrap:wrap;
+}
+.jura p{margin:0}
+.jura .grande{
+  font-family:var(--f-display);font-size:clamp(1.35rem,4vw,1.75rem);
+  line-height:1.15;color:var(--amber);
+}
+.jura .chica{color:var(--ink-2);font-size:.94rem;max-width:40ch}
+
+/* Pasos */
+.pasos{list-style:none;margin:0;padding:0;display:grid;gap:0;border-top:1px solid var(--edge)}
+.pasos li{display:grid;grid-template-columns:44px 1fr;gap:18px;padding:24px 0;border-bottom:1px solid var(--edge)}
+.pasos .n{font-family:var(--f-mono);font-size:11px;color:var(--amber);padding-top:5px;letter-spacing:.08em}
+.pasos b{display:block;font-family:var(--f-display);font-size:1.3rem;font-weight:400;margin-bottom:5px}
+.pasos p{margin:0;color:var(--ink-2);font-size:.98rem;max-width:58ch}
+
+/* Placeholders de foto */
+.galeria{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.hueco{
+  position:relative;aspect-ratio:4/3;border-radius:4px;
+  border:1px dashed var(--edge);background:var(--panel);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:16px;gap:6px;
+}
+.hueco::before{
+  content:"FOTO";position:absolute;top:14px;left:16px;
+  font-family:var(--f-mono);font-size:9.5px;letter-spacing:.24em;color:var(--amber-deep);
+}
+.hueco b{font-size:.94rem;font-weight:500;color:var(--ink-2)}
+.hueco span{font-size:.82rem;color:var(--ink-3);line-height:1.45}
+.hueco.retrato{aspect-ratio:3/4}
+
+/* No hago */
+.letra-chica{
+  margin:22px 0 0;max-width:64ch;
+  font-size:.9rem;line-height:1.6;color:var(--ink-2);
+}
+.nohago{
+  border-left:2px solid var(--edge);padding:4px 0 4px 24px;
+  color:var(--ink-2);max-width:60ch;
+}
+.nohago b{color:var(--ink);font-weight:500}
+
+/* Contacto */
+.contacto{background:var(--panel);border-top:1px solid var(--edge)}
+
+/* Una sola acción manda. El correo y la zona bajan a un pie de texto
+   corrido: en cuanto se les pone caja propia vuelven a leerse como tabla. */
+.ct-boton{
+  display:inline-flex;align-items:center;gap:18px;
+  margin-top:30px;padding:18px 24px;
+  border-radius:10px;background:var(--amber);color:var(--on-amber);
+  text-decoration:none;max-width:100%;
+  transition:background-color .18s ease, transform .18s ease;
+}
+.ct-boton:hover{background:var(--amber-hi);transform:translateY(-1px)}
+.ct-boton:active{transform:translateY(0)}
+/* El foco global es ámbar; sobre el botón ámbar no se vería. */
+.ct-boton:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+.ct-icono{flex:none}
+.ct-txt{display:flex;flex-direction:column;gap:2px;min-width:0}
+.ct-txt b{font-size:1.12rem;font-weight:600;letter-spacing:-.01em;line-height:1.25}
+.ct-txt em{font-style:normal;font-size:.87rem;opacity:.72}
+.ct-flecha{
+  margin-left:8px;font-size:1.2rem;flex:none;
+  transition:transform .18s ease;
+}
+.ct-boton:hover .ct-flecha{transform:translateX(4px)}
+@media (max-width:520px){
+  .ct-boton{display:flex;gap:14px;padding:16px 18px}
+  .ct-flecha{display:none}
+}
+
+.ct-pie{
+  margin:22px 0 0;max-width:68ch;
+  font-size:.9rem;color:var(--ink-2);line-height:1.6;
+}
+.ct-pie + .ct-pie{margin-top:8px}
+.ct-pie a{
+  display:inline-block;padding-block:7px;
+  font-family:var(--f-mono);font-size:.87rem;color:var(--ink);
+  text-decoration:none;border-bottom:1px solid var(--edge);
+  padding-bottom:1px;word-break:break-word;
+}
+.ct-pie a:hover{color:var(--amber);border-color:var(--amber-deep)}
+
+footer{padding:26px 0 34px;border-top:1px solid var(--edge)}
+footer p{margin:0;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;color:var(--ink-3)}
+
+/* Dock móvil */
+.dock{
+  position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;gap:10px;
+  padding:11px var(--gutter) calc(11px + env(safe-area-inset-bottom));
+  background:rgb(8 9 12 / .92);border-top:1px solid var(--edge);
+  backdrop-filter:blur(14px);
+}
+.dock a{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:9px;
+  text-decoration:none;font-size:14.5px;font-weight:600;
+  padding:13px;border-radius:8px;
+}
+.dock .p{background:var(--amber);color:var(--on-amber)}
+.dock .s{border:1px solid var(--edge);color:var(--ink)}
+@media (min-width:900px){ .dock{display:none} }
+@media (max-width:899px){ body{padding-bottom:74px} }
+</style>
+</head>
+<body>
+
+<div class="fondo" aria-hidden="true">
+  <span class="c2"></span>
+  <span class="c1"></span>
+</div>
+
+<span class="centinela" id="centinela"></span>
+
+<nav class="barra" id="barra">
+  <span class="barra-marca">
+    <svg class="logo" viewBox="0 0 48 48" aria-hidden="true">
+      <path fill="currentColor" d="M6 8h15v3.5h-4.5v9.75h15V11.5H27V8h15v3.5h-4.5v25H42V40H27v-3.5h4.5v-11.5h-15v11.5H21V40H6v-3.5h4.5v-25H6z"/>
+      <circle cx="24" cy="23" r="4.2" fill="var(--amber)"/>
+    </svg>
+    Hidalgo
+  </span>
+  <div class="barra-nav">
+    <a href="#tarifas">Tarifas</a>
+    <a href="#como">Cómo va</a>
+    <a href="#trabajos">Trabajos</a>
+  </div>
+  <a class="barra-cta" href="https://wa.me/34680264323?text=Hola%20Luis%2C%20te%20escribo%20por%20la%20web.%20Tengo%20un...">Escríbeme</a>
+</nav>
+
+<header class="hero">
+  <!-- El src lo decide el script según el ancho: 4 MB en escritorio, 0,7 MB en móvil. -->
+  <video id="fuente" class="hero-video" poster="media/taller-poster.jpg"
+         muted loop playsinline autoplay preload="auto" aria-hidden="true"></video>
+  <div class="hero-vela"></div>
+
+  <div class="hero-alto">
+    <span class="tag">Córdoba capital</span>
+    <span class="tag hero-claim">Móviles · Ordenadores · Consolas</span>
+  </div>
+
+  <div class="hero-medio">
+    <div>
+      <h1 class="hero-titulo acero">Hidalgo</h1>
+      <p class="hero-sub">Reparaciones</p>
+    </div>
+  </div>
+
+  <div class="hero-bajo">
+    <p class="hero-jura">Si no lo arreglo,<br><b>no cobro</b></p>
+    <a class="hero-tel" href="#tarifas">Ver tarifas ↓</a>
+  </div>
+</header>
+
+<main>
+
+  <section class="col quien" id="quien">
+    <div>
+      <div class="cab">
+        <span class="tag">01</span>
+        <h2>Me llamo Luis y arreglo cosas que otros dan por perdidas</h2>
+      </div>
+      <p class="prosa">Soy técnico informático y trabajo desde mi propio banco, con estación de soldadura y herramienta de precisión. No tengo tienda de cara al público, así que quedamos donde te venga bien en Córdoba.</p>
+      <p class="prosa">Me escribes por WhatsApp contándome qué le pasa al aparato. Te digo el precio y el plazo antes de que me dejes nada, y si hay que pedir una pieza te aviso de cuánto tarda antes de que decidas. <strong>Sin diagnósticos que se pagan aparte ni presupuestos que suben a mitad de camino.</strong></p>
+      <p class="prosa">Lo que mejor se me da son los mandos y los Joy-Con. Un stick de efecto Hall bien puesto se olvida del drift para siempre, y eso lo dejo listo casi siempre el mismo día.</p>
+    </div>
+    <div class="hueco retrato">
+      <b>Tu retrato en el banco de trabajo</b>
+      <span>Tú soldando o con el portátil abierto delante. Sirve una foto de móvil con luz de ventana. En un negocio de una persona, la cara es lo que hace que alguien te confíe un aparato de 900 €.</span>
+    </div>
+  </section>
+
+  <section class="col rule" id="tarifas">
+    <div class="cab">
+      <span class="tag">02</span>
+      <h2>Tarifas</h2>
+    </div>
+    <ul class="tarifas">
+      <li class="tar">
+        <span class="tar-n">01</span>
+        <span class="tar-c"><b>Drift de mandos</b><span>Le pongo un stick de efecto Hall, que trabaja por imán y no roza contra nada. Ese mando ya no vuelve a driftear. Joy-Con, Pro Controller, PS5 y Xbox.</span></span>
+        <span class="tar-p">desde 20 €</span>
+      </li>
+      <li class="tar">
+        <span class="tar-n">02</span>
+        <span class="tar-c"><b>Limpieza y pasta térmica</b><span>Para la consola que se apaga sola o el portátil que suena como un secador. Abro, limpio disipador y ventilador, y cambio la pasta.</span></span>
+        <span class="tar-p">desde 32 €</span>
+      </li>
+      <li class="tar">
+        <span class="tar-n">03</span>
+        <span class="tar-c"><b>SSD y clonado de tu sistema</b><span>Paso tu Windows tal cual: programas, archivos y contraseñas siguen donde estaban. El disco no va incluido, te digo cuál comprar.</span></span>
+        <span class="tar-p">40 €</span>
+      </li>
+      <li class="tar">
+        <span class="tar-n">04</span>
+        <span class="tar-c"><b>Instalación limpia de Windows</b><span>El equipo de cero, con los drivers puestos y las actualizaciones hechas.</span></span>
+        <span class="tar-p">28 €</span>
+      </li>
+      <li class="tar">
+        <span class="tar-n">05</span>
+        <span class="tar-c"><b>Pantallas, baterías y teclados</b><span>Dime el modelo exacto y te busco la pieza. Te paso precio cerrado y cuánto tarda en llegar.</span></span>
+        <span class="tar-p tenue">según modelo</span>
+      </li>
+    </ul>
+
+    <div class="jura">
+      <p class="grande">Si no lo arreglo, no cobro</p>
+      <p class="chica">Y si hace falta pedir una pieza cara, te digo lo que cuesta antes de encargarla.</p>
+    </div>
+
+    <p class="letra-chica">Estos precios son de entrega en mano en Córdoba. Si estás fuera también te lo arreglo, pero el porte de ida y vuelta va aparte y lo pagas tú: dime de dónde escribes y te lo calculo antes de cerrar nada.</p>
+  </section>
+
+  <section class="col rule" id="como">
+    <div class="cab">
+      <span class="tag">03</span>
+      <h2>Cómo va</h2>
+    </div>
+    <ol class="pasos">
+      <li>
+        <span class="n">01</span>
+        <div>
+          <b>Me cuentas qué le pasa</b>
+          <p>Por WhatsApp, con el modelo del aparato. Si se ve algo raro por fuera, mándame una foto.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">02</span>
+        <div>
+          <b>Te paso precio y plazo</b>
+          <p>Los dos cerrados. Cuando hay que encargar una pieza te digo cuánto tarda antes de que me dejes el aparato.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">03</span>
+        <div>
+          <b>Le hago fotos antes de abrirlo</b>
+          <p>Te las mando para que veas cómo llegó. Así ninguno de los dos discute después por una marca que ya estaba.</p>
+        </div>
+      </li>
+      <li>
+        <span class="n">04</span>
+        <div>
+          <b>Lo recoges funcionando</b>
+          <p>Te lo enseño montado y encendido, lo probamos juntos, y entonces pagas.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="col rule" id="trabajos">
+    <div class="cab">
+      <span class="tag">04</span>
+      <h2>Trabajos</h2>
+    </div>
+    <p class="prosa" style="margin-bottom:32px">Fotos de reparaciones reales. Nada de catálogo.</p>
+    <div class="galeria">
+      <div class="hueco">
+        <b>Joy-Con abierto con el stick Hall puesto</b>
+        <span>El interior a la vista, con la pieza nueva ya montada. Es tu trabajo más pedido y el que mejor se explica en una foto.</span>
+      </div>
+      <div class="hueco">
+        <b>Antes y después de la pasta térmica</b>
+        <span>El disipador lleno de polvo al lado del mismo disipador limpio. Convence sin necesidad de explicar nada.</span>
+      </div>
+      <div class="hueco">
+        <b>Pantalla de móvil recién cambiada</b>
+        <span>Encendida y funcionando, con la vieja rota al lado. Cuando tengas el Samsung terminado, esta es la foto.</span>
+      </div>
+      <div class="hueco">
+        <b>Tu banco de trabajo real</b>
+        <span>Estación de soldadura, destornilladores, la esterilla. Enseña que tienes herramienta de verdad y no un juego de bazar.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="col rule">
+    <div class="cab">
+      <span class="tag">05</span>
+      <h2>Lo que no hago</h2>
+    </div>
+    <p class="nohago"><b>Daños por agua, recuperación de datos y trabajo a nivel de placa base.</b> Necesitan equipo y experiencia que ahora mismo no tengo, y prefiero decírtelo de entrada. Si me llega algo así te digo dónde llevarlo, aunque no me lo quede yo.</p>
+  </section>
+
+  <section class="contacto" id="contacto">
+    <div class="col">
+      <div class="cab">
+        <span class="tag">06</span>
+        <h2>Dime qué aparato es y qué le pasa</h2>
+      </div>
+      <p class="prosa">Contesto el mismo día. Si es algo que puedo resolver en el momento, lo sueles tener de vuelta en 24 horas.</p>
+
+      <a class="ct-boton" href="https://wa.me/34680264323?text=Hola%20Luis%2C%20te%20escribo%20por%20la%20web.%20Tengo%20un...">
+        <svg class="ct-icono" viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+        </svg>
+        <span class="ct-txt">
+          <b>Escríbeme por WhatsApp</b>
+          <em>Es por donde trabajo. No cojo llamadas.</em>
+        </span>
+        <span class="ct-flecha" aria-hidden="true">→</span>
+      </a>
+
+      <p class="ct-pie">Si prefieres el correo, <a href="mailto:luishidalgoa@outlook.es">luishidalgoa@outlook.es</a>. Tardo algo más en verlo.</p>
+      <p class="ct-pie">Entrego en mano en Córdoba capital. Si estás fuera, el porte lo pagas tú y te lo calculo antes de cerrar nada.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="col"><p>Hidalgo · Reparación de móviles, PC y consolas · Córdoba</p></div>
+</footer>
+
+<div class="dock">
+  <a class="p" href="https://wa.me/34680264323?text=Hola%20Luis%2C%20te%20escribo%20por%20la%20web.%20Tengo%20un...">
+    <svg viewBox="0 0 24 24" width="19" height="19" fill="currentColor" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+    </svg>
+    Escríbeme por WhatsApp
+  </a>
+</div>
+
+<script type="module">
+/* ── Barra que se encoge (centinela de 1px, sin escuchar scroll) ── */
+const barra = document.getElementById('barra');
+const centinela = document.getElementById('centinela');
+new IntersectionObserver(([e]) => {
+  barra.classList.toggle('encogida', !e.isIntersecting);
+}).observe(centinela);
+
+/* ── Hero: elegir la copia del vídeo según el ancho ────────────────
+   Cargar 4 MB en un móvil con datos no compensa: a ese tamaño de pantalla
+   la copia de 768 px es indistinguible. */
+const video = document.getElementById('fuente');
+video.src = innerWidth < 900 ? 'media/taller-movil.mp4' : 'media/taller.mp4';
+video.play().catch(() => {});
+
+/* ── Parallax del hero ─────────────────────────────────────────────
+   El vídeo baja a 0,12 del scroll y el texto sube a 0,22: separarlos en
+   direcciones opuestas es lo que da la profundidad. Escuchar `scroll` a
+   pelo dispara en cada fotograma, así que el trabajo va dentro de un rAF
+   y se descarta lo que llegue mientras hay uno pendiente. */
+const hero = document.querySelector('.hero');
+const capas = [...hero.querySelectorAll('.hero-alto, .hero-medio, .hero-bajo')];
+const quieto = matchMedia('(prefers-reduced-motion: reduce)');
+let pendiente = false;
+
+function mover(){
+  pendiente = false;
+  const y = scrollY;
+  const alto = hero.offsetHeight;
+  if (y > alto) return;                       // fuera de plano: no gastar nada
+
+  video.style.transform = 'translate(-50%, ' + (y * 0.12).toFixed(1) + 'px)';
+  const p = y / alto;
+  const op = Math.max(0, 1 - p * 1.6);
+  for (const c of capas){
+    c.style.transform = 'translateY(' + (y * -0.22).toFixed(1) + 'px)';
+    c.style.opacity = op.toFixed(3);
+    // Ya desvanecido, "Ver tarifas" seguiría siendo clicable sin verse.
+    c.style.pointerEvents = op < 0.08 ? 'none' : '';
+  }
+}
+
+function alDesplazar(){
+  if (pendiente || quieto.matches) return;
+  pendiente = true;
+  requestAnimationFrame(mover);
+}
+
+addEventListener('scroll', alDesplazar, { passive:true });
+addEventListener('resize', alDesplazar, { passive:true });
+if (!quieto.matches) mover();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="Hidalgo Reparaciones">
+  <!-- H con serifas: del mismo mundo que Instrument Serif del titular.
+       El punto ámbar es el pad de soldadura del travesaño. -->
+  <path fill="currentColor" d="M6 8h15v3.5h-4.5v9.75h15V11.5H27V8h15v3.5h-4.5v25H42V40H27v-3.5h4.5v-11.5h-15v11.5H21V40H6v-3.5h4.5v-25H6z"/>
+  <circle cx="24" cy="23" r="4.2" fill="#E8A33D"/>
+</svg>
