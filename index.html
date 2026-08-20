@@ -295,6 +295,27 @@ section{padding-block:clamp(64px,9vw,112px)}
 .pasos b{display:block;font-family:var(--f-display);font-size:1.3rem;font-weight:400;margin-bottom:5px}
 .pasos p{margin:0;color:var(--ink-2);font-size:.98rem;max-width:58ch}
 
+/* Banda de imagen entre secciones. El fundido en los cuatro lados evita el
+   rectángulo recortado: la foto se disuelve en el fondo animado en vez de
+   terminar en una arista, que es lo que hace el resto de la página. */
+.banda{margin:0;padding-block:clamp(40px,6vw,64px);position:relative}
+.banda img{
+  display:block;width:100%;height:auto;
+  -webkit-mask-image:
+    linear-gradient(to bottom, transparent 0%, #000 14%, #000 84%, transparent 100%),
+    linear-gradient(to right, transparent 0%, #000 7%, #000 93%, transparent 100%);
+  -webkit-mask-composite:source-in;
+  mask-image:
+    linear-gradient(to bottom, transparent 0%, #000 14%, #000 84%, transparent 100%),
+    linear-gradient(to right, transparent 0%, #000 7%, #000 93%, transparent 100%);
+  mask-composite:intersect;
+}
+.banda figcaption{
+  margin-top:-8px;
+  font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-2);
+}
+
 /* Placeholders de foto */
 .galeria{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
 .hueco{
@@ -452,6 +473,15 @@ footer p{margin:0;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;
       <span>Tú soldando o con el portátil abierto delante. Sirve una foto de móvil con luz de ventana. En un negocio de una persona, la cara es lo que hace que alguien te confíe un aparato de 900 €.</span>
     </div>
   </section>
+
+  <figure class="banda col">
+    <img src="media/termica.jpg"
+         srcset="media/termica-sm.jpg 900w, media/termica.jpg 1600w"
+         sizes="(max-width: 700px) 100vw, 1180px"
+         width="1536" height="1024" loading="lazy" decoding="async"
+         alt="Banco de trabajo con estación de soldadura, pistola de calor y una consola abierta sobre la esterilla, con el ventilador y el disipador a la vista.">
+    <figcaption>El banco donde va a acabar tu aparato</figcaption>
+  </figure>
 
   <section class="col rule" id="tarifas">
     <div class="cab">
