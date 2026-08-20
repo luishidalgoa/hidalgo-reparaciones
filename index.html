@@ -497,40 +497,52 @@ section{padding-block:clamp(64px,9vw,112px)}
 
 /* Contacto */
 .contacto{background:var(--panel);border-top:1px solid var(--edge)}
-.ct-rejilla{display:grid;gap:44px}
-@media (min-width:940px){
-  .ct-rejilla{grid-template-columns:1fr minmax(340px,440px);gap:64px;align-items:start}
+
+
+/* ══ Cierre: el contacto entero es la llamada a la acción ═══
+   El fondo es el mapa, no una foto: repetir un cuarto plano de la
+   misma mesa habría sido lo más soso posible. */
+.cierre{
+  position:relative;overflow:hidden;
+  border:1px solid var(--edge);border-radius:18px;
+  background:#0A0C10;
+  min-height:clamp(520px,46vw,600px);
+  display:flex;align-items:flex-end;
+  padding:clamp(16px,2.4vw,28px);
+}
+.cierre-mapa{position:absolute;inset:0;background:radial-gradient(70% 70% at 62% 45%, #171C24 0%, #0C0F14 100%)}
+/* El velo aparta el mapa de debajo del texto sin apagarlo del todo */
+.cierre-velo{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(100deg, #0A0C10 0%, rgb(10 12 16 / .92) 30%, rgb(10 12 16 / .35) 58%, transparent 82%),
+    linear-gradient(to top, rgb(10 12 16 / .8) 0%, transparent 45%);
+}
+@media (max-width:820px){
+  .cierre-velo{background:linear-gradient(to top, #0A0C10 0%, rgb(10 12 16 / .93) 46%, rgb(10 12 16 / .5) 72%, transparent 100%)}
 }
 
-/* ── Mapa de la zona ────────────────────────────────────────
-   MapLibre con teselas de CARTO. No marca ninguna dirección:
-   señala la ciudad, que es lo que se ofrece. */
-.mapa{
-  margin:0;position:relative;overflow:hidden;
-  border:1px solid var(--edge);border-radius:12px;background:#0C0F14;
+.cierre-ficha{
+  position:relative;z-index:2;
+  width:min(440px,100%);
+  padding:28px 28px 26px;
+  background:#0A0C10;border-radius:16px;
+  box-shadow:0 26px 64px -26px rgb(0 0 0 / .95), inset 0 0 0 1px rgb(255 255 255 / .05);
 }
-.mapa-lienzo{
-  height:clamp(260px,38vw,380px);width:100%;
-  background:
-    radial-gradient(70% 70% at 50% 45%, #171C24 0%, #0C0F14 100%);
+.cierre-ficha h2{
+  margin:12px 0 12px;font-family:var(--f-display);font-weight:400;
+  font-size:clamp(1.8rem,4vw,2.4rem);line-height:1.08;letter-spacing:-.015em;
+  text-wrap:balance;
 }
-.mapa figcaption{
-  display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;
-  padding:14px 18px;border-top:1px solid var(--edge);
-  font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--ink-2);background:#0C0F14;
-}
-.mapa figcaption b{
-  font-family:var(--f-body);font-weight:400;font-size:13px;
-  letter-spacing:0;text-transform:none;color:var(--ink-3);margin-left:auto;
-}
-.mapa-punto{
-  width:7px;height:7px;border-radius:50%;background:var(--amber);
-  box-shadow:0 0 0 4px rgb(232 163 61 / .18);flex:none;
-  transform:translateY(-1px);
-}
+.cierre-txt{margin:0 0 22px;color:var(--ink-2);font-size:.98rem}
+.cierre-pie{margin:16px 0 0;font-size:.86rem;line-height:1.55;color:var(--ink-3)}
+.cierre-pie + .cierre-pie{margin-top:6px}
+.cierre-pie a{color:var(--ink-2);font-family:var(--f-mono);font-size:.82rem;
+  text-decoration:none;border-bottom:1px solid var(--edge);padding-bottom:1px}
+.cierre-pie a:hover{color:var(--amber);border-color:var(--amber-deep)}
+
 /* Controles de cristal: el blanco de fábrica de MapLibre rompe la página */
-.mapa .maplibregl-ctrl-group{
+.cierre .maplibregl-ctrl-group{
   background:rgb(14 18 24 / .5) !important;
   backdrop-filter:blur(14px) saturate(1.4);
   -webkit-backdrop-filter:blur(14px) saturate(1.4);
@@ -538,37 +550,37 @@ section{padding-block:clamp(64px,9vw,112px)}
   border-radius:11px !important;overflow:hidden;
   box-shadow:0 8px 24px -10px rgb(0 0 0 / .9), inset 0 1px 0 rgb(255 255 255 / .08);
 }
-.mapa .maplibregl-ctrl-group button{
+.cierre .maplibregl-ctrl-group button{
   background:transparent !important;width:32px;height:32px;
   transition:background-color .15s ease;
 }
-.mapa .maplibregl-ctrl-group button + button{border-top:1px solid rgb(255 255 255 / .1)}
-.mapa .maplibregl-ctrl-group button:hover{background:rgb(255 255 255 / .09) !important}
+.cierre .maplibregl-ctrl-group button + button{border-top:1px solid rgb(255 255 255 / .1)}
+.cierre .maplibregl-ctrl-group button:hover{background:rgb(255 255 255 / .09) !important}
 /* Los iconos vienen como SVG negro en background-image */
-.mapa .maplibregl-ctrl-icon{filter:invert(1) opacity(.72)}
-.mapa .maplibregl-ctrl-group button:hover .maplibregl-ctrl-icon{filter:invert(1) opacity(1)}
+.cierre .maplibregl-ctrl-icon{filter:invert(1) opacity(.72)}
+.cierre .maplibregl-ctrl-group button:hover .maplibregl-ctrl-icon{filter:invert(1) opacity(1)}
 
-.mapa .maplibregl-ctrl-attrib{
+.cierre .maplibregl-ctrl-attrib{
   background:rgb(14 18 24 / .5) !important;
   backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
   border-radius:8px 0 0 0 !important;
   font-size:9.5px !important;padding:2px 7px !important;
 }
-.mapa .maplibregl-ctrl-attrib a{color:var(--ink-3) !important}
-.mapa .maplibregl-ctrl-attrib-button{display:none !important}
-.mapa canvas{outline:none}
+.cierre .maplibregl-ctrl-attrib a{color:var(--ink-3) !important}
+.cierre .maplibregl-ctrl-attrib-button{display:none !important}
+.cierre canvas{outline:none}
 
 /* Marcador de zona en DOM, no en WebGL: se ve siempre y se estila con CSS */
-.mapa-marca{position:relative;width:16px;height:16px}
-.mapa-marca i{
+.cierre-marca{position:relative;width:16px;height:16px}
+.cierre-marca i{
   position:absolute;inset:50%;translate:-50% -50%;
   border-radius:50%;display:block;
 }
-.mapa-marca .nucleo{
+.cierre-marca .nucleo{
   width:11px;height:11px;background:var(--amber);
   box-shadow:0 0 0 2.5px #0C0F14, 0 0 12px 2px rgb(232 163 61 / .55);
 }
-.mapa-marca .aro{
+.cierre-marca .aro{
   width:74px;height:74px;
   border:1.5px solid rgb(232 163 61 / .55);
   background:rgb(232 163 61 / .1);
@@ -578,7 +590,7 @@ section{padding-block:clamp(64px,9vw,112px)}
   0%,100%{transform:scale(.92);opacity:.9}
   50%    {transform:scale(1.08);opacity:.55}
 }
-@media (prefers-reduced-motion: reduce){ .mapa-marca .aro{animation:none} }
+@media (prefers-reduced-motion: reduce){ .cierre-marca .aro{animation:none} }
 
 /* Una sola acción manda. El correo y la zona bajan a un pie de texto
    corrido: en cuanto se les pone caja propia vuelven a leerse como tabla. */
@@ -757,25 +769,7 @@ footer p{margin:0;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;
 
     <p class="letra-chica">Estos precios son de entrega en mano en Córdoba. Si estás fuera también te lo arreglo, pero el porte de ida y vuelta va aparte y lo pagas tú: dime de dónde escribes y te lo calculo antes de cerrar nada.</p>
 
-    <!-- El momento de más intención es justo aquí, recién visto el precio.
-         Sin esto hay que bajar tres secciones más para encontrar un botón. -->
-    <div class="cta">
-      <img class="cta-foto" src="media/taller-poster.jpg" width="1152" height="768"
-           loading="lazy" decoding="async" alt="">
-      <div class="cta-ficha">
-        <span class="cta-pesta" aria-hidden="true">
-          <svg viewBox="0 0 48 48" width="17" height="17">
-            <path fill="currentColor" d="M6 8h15v3.5h-4.5v9.75h15V11.5H27V8h15v3.5h-4.5v25H42V40H27v-3.5h4.5v-11.5h-15v11.5H21V40H6v-3.5h4.5v-25H6z"/>
-            <circle cx="24" cy="23" r="4.2" fill="var(--amber)"/>
-          </svg>
-        </span>
-        <h3>¿Tu modelo no sale<br>en la lista?</h3>
-        <p>Mándame cuál es y qué le pasa. Te digo precio y plazo cerrados antes de que me dejes nada, y mirarlo no se cobra.</p>
-        <a class="cta-btn" href="https://wa.me/34680264323?text=Hola%20Luis%2C%20te%20escribo%20por%20la%20web.%20Tengo%20un...">
-          <span>Pregúntame por tu modelo</span>
-          <i aria-hidden="true">→</i>
-        </a>
-      </div>
+    <p class="letra-chica">¿Tu modelo no sale en la lista? <a href="https://wa.me/34680264323?text=Hola%20Luis%2C%20te%20escribo%20por%20la%20web.%20Tengo%20un...">Dime cuál es</a> y te paso precio y plazo. Mirarlo no se cobra.</p>
     </div>
   </section>
 
@@ -876,38 +870,36 @@ footer p{margin:0;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;
   </section>
 
   <section class="contacto" id="contacto">
-    <div class="col ct-rejilla">
-      <div>
-      <div class="cab">
-        <span class="tag">06</span>
-        <h2>Dime qué aparato es y qué le pasa</h2>
-      </div>
-      <p class="prosa">Contesto el mismo día. Si es algo que puedo resolver en el momento, lo sueles tener de vuelta en 24 horas.</p>
-
-      <a class="ct-boton" href="https://wa.me/34680264323?text=Hola%20Luis%2C%20te%20escribo%20por%20la%20web.%20Tengo%20un...">
-        <svg class="ct-icono" viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
-        </svg>
-        <span class="ct-txt">
-          <b>Escríbeme por WhatsApp</b>
-          <em>Es por donde trabajo. No cojo llamadas.</em>
-        </span>
-        <span class="ct-flecha" aria-hidden="true">→</span>
-      </a>
-
-      <p class="ct-pie">Si prefieres el correo, <a href="mailto:luishidalgoa@outlook.es">luishidalgoa@outlook.es</a>. Tardo algo más en verlo.</p>
-      <p class="ct-pie">Entrego en mano en Córdoba capital. Si estás fuera, el porte lo pagas tú y te lo calculo antes de cerrar nada.</p>
-      </div>
-
-      <figure class="mapa" id="mapa">
-        <div class="mapa-lienzo" id="mapa-lienzo" role="img"
+    <div class="col">
+      <div class="cierre">
+        <div class="cierre-mapa" id="mapa-lienzo" role="img"
              aria-label="Mapa de Córdoba capital, la zona donde trabajo."></div>
-        <figcaption>
-          <span class="mapa-punto" aria-hidden="true"></span>
-          Córdoba capital
-          <b>Quedamos donde te venga bien</b>
-        </figcaption>
-      </figure>
+        <div class="cierre-velo" aria-hidden="true"></div>
+
+        <div class="cierre-ficha">
+          <span class="cta-pesta" aria-hidden="true">
+            <svg viewBox="0 0 48 48" width="17" height="17">
+              <path fill="currentColor" d="M6 8h15v3.5h-4.5v9.75h15V11.5H27V8h15v3.5h-4.5v25H42V40H27v-3.5h4.5v-11.5h-15v11.5H21V40H6v-3.5h4.5v-25H6z"/>
+              <circle cx="24" cy="23" r="4.2" fill="var(--amber)"/>
+            </svg>
+          </span>
+
+          <span class="tag">06 · Córdoba capital</span>
+          <h2>Dime qué aparato es y qué le pasa</h2>
+          <p class="cierre-txt">Contesto el mismo día. Si es algo que puedo resolver en el momento, lo sueles tener de vuelta en 24 horas.</p>
+
+          <a class="cta-btn" href="https://wa.me/34680264323?text=Hola%20Luis%2C%20te%20escribo%20por%20la%20web.%20Tengo%20un...">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+            </svg>
+            <span>Escríbeme por WhatsApp</span>
+            <i aria-hidden="true">→</i>
+          </a>
+
+          <p class="cierre-pie">Es por donde trabajo, no cojo llamadas. Si prefieres el correo, <a href="mailto:luishidalgoa@outlook.es">luishidalgoa@outlook.es</a>.</p>
+          <p class="cierre-pie">Entrego en mano en Córdoba. Fuera, el porte lo pagas tú y te lo calculo antes.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1014,7 +1006,7 @@ if (!quieto.matches) mover();
    Se carga solo cuando el mapa está a punto de entrar en pantalla: son
    unos 200 KB que no tienen por qué pesar en la primera carga. */
 const CORDOBA = [-4.7794, 37.8882];
-const cajaMapa = document.getElementById('mapa');
+const cajaMapa = document.querySelector('.cierre');
 let mapaPedido = false;
 
 function traer(url, tipo){
@@ -1030,7 +1022,7 @@ function traer(url, tipo){
 async function montarMapa(){
   if (mapaPedido) return;
   mapaPedido = true;
-  const base = 'https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl';
+  const base = 'vendor/maplibre-gl';   // servido desde el propio sitio
   try {
     await Promise.all([traer(base + '.css', 'css'), traer(base + '.js', 'js')]);
   } catch {
@@ -1040,7 +1032,7 @@ async function montarMapa(){
   const mapa = new maplibregl.Map({
     container: 'mapa-lienzo',
     center: CORDOBA,
-    zoom: 11.4,
+    zoom: 11.9,
     attributionControl: { compact: false },
     style: {
       version: 8,
@@ -1059,21 +1051,43 @@ async function montarMapa(){
   });
 
   mapa.scrollZoom.disable();          // que la rueda siga bajando por la página
+  /* La ficha tapa la izquierda: se desplaza el encuadre para que Córdoba
+     quede en la mitad visible en vez de debajo del texto. Va dentro de
+     'load' porque antes de tener estilo, setPadding revienta. */
+  const apartar = () => {
+    if (!mapa.isStyleLoaded()) return;
+    mapa.setPadding(
+      innerWidth >= 820 ? { left: 420, top: 0, right: 0, bottom: 0 }
+                        : { left: 0, top: 0, right: 0, bottom: 230 }
+    );
+  };
+  mapa.once('load', apartar);
+  addEventListener('resize', apartar, { passive:true });
   mapa.addControl(new maplibregl.NavigationControl({ showCompass:false }), 'top-right');
 
   /* La marca va en DOM y no como capa del mapa: así se ve aunque el WebGL
      esté renderizando por software, y el aro se anima con CSS normal.
      Señala la ciudad, no un domicilio. */
   const marca = document.createElement('div');
-  marca.className = 'mapa-marca';
+  marca.className = 'cierre-marca';
   marca.innerHTML = '<i class="aro"></i><i class="nucleo"></i>';
   new maplibregl.Marker({ element: marca }).setLngLat(CORDOBA).addTo(mapa);
 }
 
 if (cajaMapa){
-  new IntersectionObserver((entradas, obs) => {
+  const vigia = new IntersectionObserver((entradas, obs) => {
     if (entradas[0].isIntersecting){ montarMapa(); obs.disconnect(); }
-  }, { rootMargin: '400px' }).observe(cajaMapa);
+  }, { rootMargin: '400px' });
+  vigia.observe(cajaMapa);
+
+  /* Respaldo: hay situaciones en las que el observador no llega a disparar
+     (pestaña en segundo plano al cargar, navegador que pausa el documento).
+     Sin esto el mapa no aparecería nunca. montarMapa se protege sola de
+     ejecutarse dos veces. */
+  addEventListener('load', () => setTimeout(() => {
+    vigia.disconnect();
+    montarMapa();
+  }, 1500));
 }
 </script>
 
