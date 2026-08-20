@@ -28,6 +28,63 @@
 }
 </script>
 
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "¿Cuánto tardas?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Si tengo la pieza, el mismo día o al siguiente. Si hay que pedirla te digo el plazo antes de que me dejes nada: hay repuestos que llegan en dos días y otros que tardan tres semanas."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Y si al final no tiene arreglo?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Te lo devuelvo como estaba y no me pagas la mano de obra. Si para averiguarlo hacía falta comprar una pieza cara, eso lo hablamos antes de encargarla y no después."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Dónde quedamos?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "En Córdoba capital, donde te venga bien. No tengo tienda: soy yo y mi banco de trabajo, así que quedamos y ya está."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Cómo se paga?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Efectivo o Bizum, al recogerlo y después de probarlo delante de ti. Cuando el arreglo lleva una pieza cara, esa va por adelantado, porque si te echas atrás me quedo con un repuesto que no sirve para otro aparato."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Voy a perder la garantía?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Si el aparato todavía está en garantía, llévalo primero al servicio oficial. Te sale gratis y no tiene sentido que lo pagues. Si veo que es tu caso te lo digo yo, aunque me quede sin el trabajo."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "¿Y si no vivo en Córdoba?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "También te lo arreglo, pero el porte de ida y vuelta lo pagas tú y te lo calculo antes de cerrar nada. Para un mando suele compensar; para un portátil, casi nunca."
+   }
+  }
+ ]
+}
+</script>
+
 <style>
 /* ══ Tokens ══════════════════════════════════════════════
    Paleta sacada del propio vídeo: negro de taller sin luz,
@@ -298,7 +355,9 @@ section{padding-block:clamp(64px,9vw,112px)}
 /* Banda de imagen entre secciones. El fundido en los cuatro lados evita el
    rectángulo recortado: la foto se disuelve en el fondo animado en vez de
    terminar en una arista, que es lo que hace el resto de la página. */
-.banda{margin:0;padding-block:clamp(40px,6vw,64px);position:relative}
+/* margin-block, no margin: un margin:0 aquí anula el margin-inline:auto de
+   .col y la banda deja de centrarse, quedando pegada al borde izquierdo. */
+.banda{margin-block:0;padding-block:clamp(40px,6vw,64px);position:relative}
 .banda img{
   display:block;width:100%;height:auto;
   -webkit-mask-image:
@@ -335,6 +394,16 @@ section{padding-block:clamp(64px,9vw,112px)}
 .hueco b{font-size:.94rem;font-weight:500;color:var(--ink-2)}
 .hueco span{font-size:.82rem;color:var(--ink-3);line-height:1.45}
 .hueco.retrato{aspect-ratio:3/4}
+
+/* Preguntas frecuentes */
+.faq{margin:0;padding:0;display:grid;gap:0;border-top:1px solid var(--edge)}
+@media (min-width:820px){ .faq{grid-template-columns:repeat(2,1fr);column-gap:56px} }
+.faq > div{padding:22px 0;border-bottom:1px solid var(--edge)}
+.faq dt{
+  font-family:var(--f-display);font-size:1.24rem;font-weight:400;
+  letter-spacing:-.005em;margin-bottom:7px;
+}
+.faq dd{margin:0;color:var(--ink-2);font-size:.97rem;max-width:52ch}
 
 /* No hago */
 .letra-chica{
@@ -431,7 +500,7 @@ footer p{margin:0;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;
   <div class="barra-nav">
     <a href="#tarifas">Tarifas</a>
     <a href="#como">Cómo va</a>
-    <a href="#trabajos">Trabajos</a>
+    <a href="#dudas">Dudas</a>
   </div>
   <a class="barra-cta" href="https://wa.me/34680264323?text=Hola%20Luis%2C%20te%20escribo%20por%20la%20web.%20Tengo%20un...">Escríbeme</a>
 </nav>
@@ -583,30 +652,37 @@ footer p{margin:0;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;
     <figcaption>Un SSD entrando donde estaba el disco viejo</figcaption>
   </figure>
 
-  <section class="col rule" id="trabajos">
+  <section class="col rule" id="dudas">
     <div class="cab">
       <span class="tag">04</span>
-      <h2>Trabajos</h2>
+      <h2>Lo que suelen preguntarme</h2>
     </div>
-    <p class="prosa" style="margin-bottom:32px">Fotos de reparaciones reales. Nada de catálogo.</p>
-    <div class="galeria">
-      <div class="hueco">
-        <b>Joy-Con abierto con el stick Hall puesto</b>
-        <span>El interior a la vista, con la pieza nueva ya montada. Es tu trabajo más pedido y el que mejor se explica en una foto.</span>
+    <dl class="faq">
+      <div>
+        <dt>¿Cuánto tardas?</dt>
+        <dd>Si tengo la pieza, el mismo día o al siguiente. Si hay que pedirla te digo el plazo antes de que me dejes nada: hay repuestos que llegan en dos días y otros que tardan tres semanas.</dd>
       </div>
-      <div class="hueco">
-        <b>Antes y después de la pasta térmica</b>
-        <span>El disipador lleno de polvo al lado del mismo disipador limpio. Convence sin necesidad de explicar nada.</span>
+      <div>
+        <dt>¿Y si al final no tiene arreglo?</dt>
+        <dd>Te lo devuelvo como estaba y no me pagas la mano de obra. Si para averiguarlo hacía falta comprar una pieza cara, eso lo hablamos antes de encargarla y no después.</dd>
       </div>
-      <div class="hueco">
-        <b>Pantalla de móvil recién cambiada</b>
-        <span>Encendida y funcionando, con la vieja rota al lado. Cuando tengas el Samsung terminado, esta es la foto.</span>
+      <div>
+        <dt>¿Dónde quedamos?</dt>
+        <dd>En Córdoba capital, donde te venga bien. No tengo tienda: soy yo y mi banco de trabajo, así que quedamos y ya está.</dd>
       </div>
-      <div class="hueco">
-        <b>Tu banco de trabajo real</b>
-        <span>Estación de soldadura, destornilladores, la esterilla. Enseña que tienes herramienta de verdad y no un juego de bazar.</span>
+      <div>
+        <dt>¿Cómo se paga?</dt>
+        <dd>Efectivo o Bizum, al recogerlo y después de probarlo delante de ti. Cuando el arreglo lleva una pieza cara, esa va por adelantado, porque si te echas atrás me quedo con un repuesto que no sirve para otro aparato.</dd>
       </div>
-    </div>
+      <div>
+        <dt>¿Voy a perder la garantía?</dt>
+        <dd>Si el aparato todavía está en garantía, llévalo primero al servicio oficial. Te sale gratis y no tiene sentido que lo pagues. Si veo que es tu caso te lo digo yo, aunque me quede sin el trabajo.</dd>
+      </div>
+      <div>
+        <dt>¿Y si no vivo en Córdoba?</dt>
+        <dd>También te lo arreglo, pero el porte de ida y vuelta lo pagas tú y te lo calculo antes de cerrar nada. Para un mando suele compensar; para un portátil, casi nunca.</dd>
+      </div>
+    </dl>
   </section>
 
   <section class="col rule">
@@ -640,6 +716,36 @@ footer p{margin:0;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;
       <p class="ct-pie">Entrego en mano en Córdoba capital. Si estás fuera, el porte lo pagas tú y te lo calculo antes de cerrar nada.</p>
     </div>
   </section>
+
+  <!-- Sección "Trabajos" retirada hasta tener fotos reales de reparaciones
+       terminadas. El marcado y los estilos (.galeria, .hueco) siguen en el
+       archivo: basta con volver a pegarla con las fotos puestas.
+  <section class="col rule" id="trabajos">
+    <div class="cab">
+      <span class="tag">04</span>
+      <h2>Trabajos</h2>
+    </div>
+    <p class="prosa" style="margin-bottom:32px">Fotos de reparaciones reales. Nada de catálogo.</p>
+    <div class="galeria">
+      <div class="hueco">
+        <b>Joy-Con abierto con el stick Hall puesto</b>
+        <span>El interior a la vista, con la pieza nueva ya montada. Es tu trabajo más pedido y el que mejor se explica en una foto.</span>
+      </div>
+      <div class="hueco">
+        <b>Antes y después de la pasta térmica</b>
+        <span>El disipador lleno de polvo al lado del mismo disipador limpio. Convence sin necesidad de explicar nada.</span>
+      </div>
+      <div class="hueco">
+        <b>Pantalla de móvil recién cambiada</b>
+        <span>Encendida y funcionando, con la vieja rota al lado. Cuando tengas el Samsung terminado, esta es la foto.</span>
+      </div>
+      <div class="hueco">
+        <b>Tu banco de trabajo real</b>
+        <span>Estación de soldadura, destornilladores, la esterilla. Enseña que tienes herramienta de verdad y no un juego de bazar.</span>
+      </div>
+    </div>
+  </section>
+  -->
 
 </main>
 
