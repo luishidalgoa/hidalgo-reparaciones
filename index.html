@@ -461,6 +461,25 @@ section{padding-block:clamp(64px,9vw,112px)}
   line-height:1.6;text-transform:uppercase;color:var(--ink-2);
 }
 
+/* Retrato */
+.retrato{
+  margin:0;position:relative;overflow:hidden;
+  border:1px solid var(--edge);border-radius:12px;background:var(--panel);
+}
+.retrato img{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover}
+.retrato figcaption{
+  position:absolute;left:0;right:0;bottom:0;
+  padding:34px 20px 18px;
+  display:flex;flex-direction:column;gap:2px;
+  font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink);
+  background:linear-gradient(to top, rgb(8 9 12 / .92) 0%, rgb(8 9 12 / .6) 55%, transparent 100%);
+}
+.retrato figcaption span{
+  letter-spacing:.06em;text-transform:none;
+  font-family:var(--f-body);font-size:12.5px;color:var(--ink-2);
+}
+
 /* Placeholders de foto */
 .galeria{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
 .hueco{
@@ -728,10 +747,14 @@ footer p{margin:0;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;
       <p class="prosa">Me escribes por WhatsApp contándome qué le pasa al aparato. Te digo el precio y el plazo antes de que me dejes nada, y si hay que pedir una pieza te aviso de cuánto tarda antes de que decidas. <strong>Sin diagnósticos que se pagan aparte ni presupuestos que suben a mitad de camino.</strong></p>
       <p class="prosa">Lo que mejor se me da son los mandos y los Joy-Con. Un stick de efecto Hall bien puesto se olvida del drift para siempre, y eso lo dejo listo casi siempre el mismo día.</p>
     </div>
-    <div class="hueco retrato">
-      <b>Tu retrato en el banco de trabajo</b>
-      <span>Tú soldando o con el portátil abierto delante. Sirve una foto de móvil con luz de ventana. En un negocio de una persona, la cara es lo que hace que alguien te confíe un aparato de 900 €.</span>
-    </div>
+    <figure class="retrato">
+      <img src="media/luis.jpg"
+           srcset="media/luis-sm.jpg 460w, media/luis.jpg 760w"
+           sizes="(max-width: 880px) 100vw, 420px"
+           width="700" height="933" loading="lazy" decoding="async"
+           alt="Luis Hidalgo, que es quien va a abrir tu aparato.">
+      <figcaption>Luis Hidalgo <span>Quien te contesta y quien lo abre</span></figcaption>
+    </figure>
   </section>
 
   <figure class="banda col">
