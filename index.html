@@ -195,13 +195,33 @@ main::before{
   transition:width .3s ease, top .3s ease, padding .3s ease,
              border-radius .3s ease, background-color .3s ease;
 }
+/* Compactada: negro macizo, esquinas muy redondeadas y un botón claro que
+   corta contra el negro. Sin translucidez: la barra deja de ser un cristal
+   sobre la página y pasa a ser una pieza que flota encima. */
 .barra.encogida{
-  width:min(680px,calc(100% - 2rem));
-  top:.9rem;padding:.5rem .5rem .5rem 1.25rem;
-  border-radius:999px;background:rgb(16 18 24 / .78);
-  box-shadow:inset 0 0 0 1px rgb(255 255 255 / .12);
-  backdrop-filter:blur(16px);
+  width:min(820px,calc(100% - 2rem));
+  top:.85rem;padding:.42rem .42rem .42rem 1.05rem;
+  border-radius:22px;
+  background:#0A0C10;
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / .07),
+    0 10px 34px -12px rgb(0 0 0 / .85);
+  backdrop-filter:none;
+  gap:1.4rem;
 }
+.barra.encogida .barra-marca{font-family:var(--f-body);font-weight:600;font-size:16px;letter-spacing:-.01em}
+.barra.encogida .logo{
+  width:30px;height:30px;padding:6px;border-radius:8px;
+  background:var(--amber);color:var(--on-amber);
+}
+.barra.encogida .barra-nav{gap:1.35rem;font-size:13.5px}
+.barra.encogida .barra-nav a{opacity:1;color:#8E949E}
+.barra.encogida .barra-nav a:hover{color:#fff}
+.barra.encogida .barra-cta{
+  background:#F5F3EF;color:#0A0C10;
+  padding:.6rem 1.15rem;border-radius:15px;font-weight:600;font-size:13.5px;
+}
+.barra.encogida .barra-cta:hover{background:#fff}
 .barra-marca{
   display:inline-flex;align-items:center;gap:9px;
   font-family:var(--f-display);font-size:19px;letter-spacing:.01em;
@@ -418,6 +438,88 @@ section{padding-block:clamp(64px,9vw,112px)}
 
 /* Contacto */
 .contacto{background:var(--panel);border-top:1px solid var(--edge)}
+.ct-rejilla{display:grid;gap:44px}
+@media (min-width:940px){
+  .ct-rejilla{grid-template-columns:1fr minmax(340px,440px);gap:64px;align-items:start}
+}
+
+/* ── Mapa de la zona ────────────────────────────────────────
+   MapLibre con teselas de CARTO. No marca ninguna dirección:
+   señala la ciudad, que es lo que se ofrece. */
+.mapa{
+  margin:0;position:relative;overflow:hidden;
+  border:1px solid var(--edge);border-radius:12px;background:#0C0F14;
+}
+.mapa-lienzo{
+  height:clamp(260px,38vw,380px);width:100%;
+  background:
+    radial-gradient(70% 70% at 50% 45%, #171C24 0%, #0C0F14 100%);
+}
+.mapa figcaption{
+  display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;
+  padding:14px 18px;border-top:1px solid var(--edge);
+  font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-2);background:#0C0F14;
+}
+.mapa figcaption b{
+  font-family:var(--f-body);font-weight:400;font-size:13px;
+  letter-spacing:0;text-transform:none;color:var(--ink-3);margin-left:auto;
+}
+.mapa-punto{
+  width:7px;height:7px;border-radius:50%;background:var(--amber);
+  box-shadow:0 0 0 4px rgb(232 163 61 / .18);flex:none;
+  transform:translateY(-1px);
+}
+/* Controles de cristal: el blanco de fábrica de MapLibre rompe la página */
+.mapa .maplibregl-ctrl-group{
+  background:rgb(14 18 24 / .5) !important;
+  backdrop-filter:blur(14px) saturate(1.4);
+  -webkit-backdrop-filter:blur(14px) saturate(1.4);
+  border:1px solid rgb(255 255 255 / .14);
+  border-radius:11px !important;overflow:hidden;
+  box-shadow:0 8px 24px -10px rgb(0 0 0 / .9), inset 0 1px 0 rgb(255 255 255 / .08);
+}
+.mapa .maplibregl-ctrl-group button{
+  background:transparent !important;width:32px;height:32px;
+  transition:background-color .15s ease;
+}
+.mapa .maplibregl-ctrl-group button + button{border-top:1px solid rgb(255 255 255 / .1)}
+.mapa .maplibregl-ctrl-group button:hover{background:rgb(255 255 255 / .09) !important}
+/* Los iconos vienen como SVG negro en background-image */
+.mapa .maplibregl-ctrl-icon{filter:invert(1) opacity(.72)}
+.mapa .maplibregl-ctrl-group button:hover .maplibregl-ctrl-icon{filter:invert(1) opacity(1)}
+
+.mapa .maplibregl-ctrl-attrib{
+  background:rgb(14 18 24 / .5) !important;
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-radius:8px 0 0 0 !important;
+  font-size:9.5px !important;padding:2px 7px !important;
+}
+.mapa .maplibregl-ctrl-attrib a{color:var(--ink-3) !important}
+.mapa .maplibregl-ctrl-attrib-button{display:none !important}
+.mapa canvas{outline:none}
+
+/* Marcador de zona en DOM, no en WebGL: se ve siempre y se estila con CSS */
+.mapa-marca{position:relative;width:16px;height:16px}
+.mapa-marca i{
+  position:absolute;inset:50%;translate:-50% -50%;
+  border-radius:50%;display:block;
+}
+.mapa-marca .nucleo{
+  width:11px;height:11px;background:var(--amber);
+  box-shadow:0 0 0 2.5px #0C0F14, 0 0 12px 2px rgb(232 163 61 / .55);
+}
+.mapa-marca .aro{
+  width:74px;height:74px;
+  border:1.5px solid rgb(232 163 61 / .55);
+  background:rgb(232 163 61 / .1);
+  animation:latir 3.4s ease-in-out infinite;
+}
+@keyframes latir{
+  0%,100%{transform:scale(.92);opacity:.9}
+  50%    {transform:scale(1.08);opacity:.55}
+}
+@media (prefers-reduced-motion: reduce){ .mapa-marca .aro{animation:none} }
 
 /* Una sola acción manda. El correo y la zona bajan a un pie de texto
    corrido: en cuanto se les pone caja propia vuelven a leerse como tabla. */
@@ -694,7 +796,8 @@ footer p{margin:0;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;
   </section>
 
   <section class="contacto" id="contacto">
-    <div class="col">
+    <div class="col ct-rejilla">
+      <div>
       <div class="cab">
         <span class="tag">06</span>
         <h2>Dime qué aparato es y qué le pasa</h2>
@@ -714,6 +817,17 @@ footer p{margin:0;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;
 
       <p class="ct-pie">Si prefieres el correo, <a href="mailto:luishidalgoa@outlook.es">luishidalgoa@outlook.es</a>. Tardo algo más en verlo.</p>
       <p class="ct-pie">Entrego en mano en Córdoba capital. Si estás fuera, el porte lo pagas tú y te lo calculo antes de cerrar nada.</p>
+      </div>
+
+      <figure class="mapa" id="mapa">
+        <div class="mapa-lienzo" id="mapa-lienzo" role="img"
+             aria-label="Mapa de Córdoba capital, la zona donde trabajo."></div>
+        <figcaption>
+          <span class="mapa-punto" aria-hidden="true"></span>
+          Córdoba capital
+          <b>Quedamos donde te venga bien</b>
+        </figcaption>
+      </figure>
     </div>
   </section>
 
@@ -813,6 +927,74 @@ function alDesplazar(){
 addEventListener('scroll', alDesplazar, { passive:true });
 addEventListener('resize', alDesplazar, { passive:true });
 if (!quieto.matches) mover();
+
+/* ── Mapa de la zona ───────────────────────────────────────────────
+   MapLibre es el motor que hay debajo de mapcn; mapcn en sí es React
+   con Tailwind y aquí no hay build, así que se usa la librería a pelo.
+   Se carga solo cuando el mapa está a punto de entrar en pantalla: son
+   unos 200 KB que no tienen por qué pesar en la primera carga. */
+const CORDOBA = [-4.7794, 37.8882];
+const cajaMapa = document.getElementById('mapa');
+let mapaPedido = false;
+
+function traer(url, tipo){
+  return new Promise((ok, mal) => {
+    const el = document.createElement(tipo === 'css' ? 'link' : 'script');
+    if (tipo === 'css'){ el.rel = 'stylesheet'; el.href = url; }
+    else { el.src = url; }
+    el.onload = ok; el.onerror = mal;
+    document.head.appendChild(el);
+  });
+}
+
+async function montarMapa(){
+  if (mapaPedido) return;
+  mapaPedido = true;
+  const base = 'https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl';
+  try {
+    await Promise.all([traer(base + '.css', 'css'), traer(base + '.js', 'js')]);
+  } catch {
+    return;   // sin red o CDN caído: se queda el degradado de fondo y ya está
+  }
+
+  const mapa = new maplibregl.Map({
+    container: 'mapa-lienzo',
+    center: CORDOBA,
+    zoom: 11.4,
+    attributionControl: { compact: false },
+    style: {
+      version: 8,
+      sources: {
+        carto: {
+          type: 'raster',
+          tiles: ['https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png',
+                  'https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png',
+                  'https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png'],
+          tileSize: 256, maxzoom: 19,
+          attribution: '© OpenStreetMap · © CARTO'
+        }
+      },
+      layers: [{ id: 'base', type: 'raster', source: 'carto' }]
+    }
+  });
+
+  mapa.scrollZoom.disable();          // que la rueda siga bajando por la página
+  mapa.addControl(new maplibregl.NavigationControl({ showCompass:false }), 'top-right');
+
+  /* La marca va en DOM y no como capa del mapa: así se ve aunque el WebGL
+     esté renderizando por software, y el aro se anima con CSS normal.
+     Señala la ciudad, no un domicilio. */
+  const marca = document.createElement('div');
+  marca.className = 'mapa-marca';
+  marca.innerHTML = '<i class="aro"></i><i class="nucleo"></i>';
+  new maplibregl.Marker({ element: marca }).setLngLat(CORDOBA).addTo(mapa);
+}
+
+if (cajaMapa){
+  new IntersectionObserver((entradas, obs) => {
+    if (entradas[0].isIntersecting){ montarMapa(); obs.disconnect(); }
+  }, { rootMargin: '400px' }).observe(cajaMapa);
+}
 </script>
 
 </body>
