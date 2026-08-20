@@ -510,10 +510,10 @@ section{padding-block:clamp(64px,9vw,112px)}
   display:flex;align-items:flex-end;
   padding:clamp(16px,2.4vw,28px);
 }
-.cierre-mapa{position:absolute;inset:0;background:radial-gradient(70% 70% at 62% 45%, #171C24 0%, #0C0F14 100%)}
+.cierre-mapa{position:absolute;inset:0;z-index:0;background:radial-gradient(70% 70% at 62% 45%, #171C24 0%, #0C0F14 100%)}
 /* El velo aparta el mapa de debajo del texto sin apagarlo del todo */
 .cierre-velo{
-  position:absolute;inset:0;pointer-events:none;
+  position:absolute;inset:0;z-index:1;pointer-events:none;
   background:
     linear-gradient(100deg, #0A0C10 0%, rgb(10 12 16 / .92) 30%, rgb(10 12 16 / .35) 58%, transparent 82%),
     linear-gradient(to top, rgb(10 12 16 / .8) 0%, transparent 45%);
@@ -1061,7 +1061,14 @@ async function montarMapa(){
                         : { left: 0, top: 0, right: 0, bottom: 230 }
     );
   };
-  mapa.once('load', apartar);
+  mapa.once('load', () => {
+    apartar();
+    /* Un contenedor absoluto puede no tener su tamaño final cuando MapLibre
+       lo mide. Sin este resize el lienzo se queda a cero y no pinta nada. */
+    mapa.resize();
+  });
+  /* Y otra vez cuando el bloque cambie de tamaño de verdad. */
+  new ResizeObserver(() => mapa.resize()).observe(cajaMapa);
   addEventListener('resize', apartar, { passive:true });
   mapa.addControl(new maplibregl.NavigationControl({ showCompass:false }), 'top-right');
 
