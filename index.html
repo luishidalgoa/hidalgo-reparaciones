@@ -365,6 +365,65 @@ section{padding-block:clamp(64px,9vw,112px)}
 }
 .jura .chica{color:var(--ink-2);font-size:.94rem;max-width:40ch}
 
+/* ══ Llamada tras las tarifas ═══════════════════════════════
+   Foto a sangre con una ficha oscura anclada a una esquina, y la
+   pestaña del logo saliendo por arriba con la esquina cóncava. */
+.cta{
+  position:relative;margin-top:40px;
+  border-radius:16px;overflow:hidden;
+  background:#0A0C10;border:1px solid var(--edge);
+}
+.cta-foto{
+  display:block;width:100%;height:100%;object-fit:cover;
+  aspect-ratio:16/7;
+}
+@media (max-width:760px){ .cta-foto{aspect-ratio:4/3;object-position:60% 50%} }
+
+.cta-ficha{
+  position:absolute;left:clamp(14px,2.4vw,26px);bottom:clamp(14px,2.4vw,26px);
+  width:min(400px,calc(100% - clamp(28px,4.8vw,52px)));
+  padding:26px 26px 24px;
+  background:#0A0C10;border-radius:16px 16px 16px 16px;
+  box-shadow:0 24px 60px -24px rgb(0 0 0 / .95);
+}
+/* Pestaña: sale por arriba a la derecha, como una lengüeta de la ficha */
+.cta-pesta{
+  position:absolute;right:0;bottom:100%;
+  width:52px;height:44px;
+  display:grid;place-items:center;
+  background:#0A0C10;color:var(--ink);
+  border-radius:14px 14px 0 0;
+}
+/* El diente cóncavo que une la lengüeta con la ficha */
+.cta-pesta::after{
+  content:"";position:absolute;bottom:0;left:-16px;
+  width:16px;height:16px;
+  background:radial-gradient(circle at 0 0, transparent 15.5px, #0A0C10 16px);
+}
+.cta-ficha h3{
+  margin:0 0 10px;font-family:var(--f-display);font-weight:400;
+  font-size:clamp(1.5rem,3.4vw,1.95rem);line-height:1.12;letter-spacing:-.01em;
+}
+.cta-ficha p{
+  margin:0 0 20px;color:var(--ink-2);
+  font-size:.93rem;line-height:1.6;
+}
+.cta-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:5px 5px 5px 17px;border-radius:999px;
+  background:#F5F3EF;color:#0A0C10;text-decoration:none;
+  font-weight:600;font-size:13.5px;
+  transition:background-color .16s ease;
+}
+.cta-btn:hover{background:#fff}
+.cta-btn i{
+  width:30px;height:30px;flex:none;border-radius:50%;
+  background:var(--amber);color:var(--on-amber);
+  display:grid;place-items:center;font-style:normal;font-size:14px;
+  transition:transform .18s ease;
+}
+.cta-btn:hover i{transform:translateX(2px)}
+
 /* Pasos */
 .pasos{list-style:none;margin:0;padding:0;display:grid;gap:0;border-top:1px solid var(--edge)}
 .pasos li{display:grid;grid-template-columns:44px 1fr;gap:18px;padding:24px 0;border-bottom:1px solid var(--edge)}
@@ -697,6 +756,27 @@ footer p{margin:0;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;
     </div>
 
     <p class="letra-chica">Estos precios son de entrega en mano en Córdoba. Si estás fuera también te lo arreglo, pero el porte de ida y vuelta va aparte y lo pagas tú: dime de dónde escribes y te lo calculo antes de cerrar nada.</p>
+
+    <!-- El momento de más intención es justo aquí, recién visto el precio.
+         Sin esto hay que bajar tres secciones más para encontrar un botón. -->
+    <div class="cta">
+      <img class="cta-foto" src="media/taller-poster.jpg" width="1152" height="768"
+           loading="lazy" decoding="async" alt="">
+      <div class="cta-ficha">
+        <span class="cta-pesta" aria-hidden="true">
+          <svg viewBox="0 0 48 48" width="17" height="17">
+            <path fill="currentColor" d="M6 8h15v3.5h-4.5v9.75h15V11.5H27V8h15v3.5h-4.5v25H42V40H27v-3.5h4.5v-11.5h-15v11.5H21V40H6v-3.5h4.5v-25H6z"/>
+            <circle cx="24" cy="23" r="4.2" fill="var(--amber)"/>
+          </svg>
+        </span>
+        <h3>¿Tu modelo no sale<br>en la lista?</h3>
+        <p>Mándame cuál es y qué le pasa. Te digo precio y plazo cerrados antes de que me dejes nada, y mirarlo no se cobra.</p>
+        <a class="cta-btn" href="https://wa.me/34680264323?text=Hola%20Luis%2C%20te%20escribo%20por%20la%20web.%20Tengo%20un...">
+          <span>Pregúntame por tu modelo</span>
+          <i aria-hidden="true">→</i>
+        </a>
+      </div>
+    </div>
   </section>
 
   <figure class="banda col">
