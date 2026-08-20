@@ -311,9 +311,13 @@ section{padding-block:clamp(64px,9vw,112px)}
   mask-composite:intersect;
 }
 .banda figcaption{
-  margin-top:-8px;
+  /* El pie se alinea con la parte nítida de la imagen, no con el borde de la
+     columna: los primeros píxeles laterales están fundidos por la máscara y
+     el texto ahí parece pegado al canto. */
+  margin-top:10px;
+  padding-inline:clamp(16px,4%,38px);
   font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--ink-2);
+  line-height:1.6;text-transform:uppercase;color:var(--ink-2);
 }
 
 /* Placeholders de foto */
@@ -475,12 +479,12 @@ footer p{margin:0;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;
   </section>
 
   <figure class="banda col">
-    <img src="media/termica.jpg"
-         srcset="media/termica-sm.jpg 900w, media/termica.jpg 1600w"
+    <img src="media/movil.jpg"
+         srcset="media/movil-sm.jpg 900w, media/movil.jpg 1600w"
          sizes="(max-width: 700px) 100vw, 1180px"
          width="1536" height="1024" loading="lazy" decoding="async"
-         alt="Banco de trabajo con estación de soldadura, pistola de calor y una consola abierta sobre la esterilla, con el ventilador y el disipador a la vista.">
-    <figcaption>El banco donde va a acabar tu aparato</figcaption>
+         alt="Un móvil abierto sobre la esterilla con la pantalla separada del chasis, junto a las púas, la ventosa y la cinta de doble cara.">
+    <figcaption>Un cambio de pantalla, con el conjunto ya separado</figcaption>
   </figure>
 
   <section class="col rule" id="tarifas">
@@ -569,6 +573,15 @@ footer p{margin:0;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;
       </li>
     </ol>
   </section>
+
+  <figure class="banda col">
+    <img src="media/ssd.jpg"
+         srcset="media/ssd-sm.jpg 900w, media/ssd.jpg 1600w"
+         sizes="(max-width: 700px) 100vw, 1180px"
+         width="1672" height="941" loading="lazy" decoding="async"
+         alt="Portátil abierto por debajo con la bahía del disco vacía y un SSD listo para entrar, con los tornillos alineados en la esterilla.">
+    <figcaption>Un SSD entrando donde estaba el disco viejo</figcaption>
+  </figure>
 
   <section class="col rule" id="trabajos">
     <div class="cab">
