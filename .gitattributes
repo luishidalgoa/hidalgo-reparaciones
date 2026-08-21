@@ -1,1 +1,2 @@
 vendor/* linguist-vendored
+kit.js linguist-vendored=false
