@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://reparaciones.hdglabs.com/sitemap.xml
