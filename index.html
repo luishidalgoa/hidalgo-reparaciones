@@ -497,6 +497,18 @@ section{padding-block:clamp(64px,9vw,112px)}
   line-height:1.6;text-transform:uppercase;color:var(--ink-2);
 }
 
+/* Spot */
+.spot{margin-block:0;padding-block:clamp(40px,6vw,64px);position:relative}
+.spot video{
+  display:block;width:100%;height:auto;aspect-ratio:16/9;
+  border:1px solid var(--edge);border-radius:12px;background:#050a14;
+}
+.spot figcaption{
+  margin-top:12px;padding-inline:clamp(2px,1%,6px);
+  font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-2);
+}
+
 /* Retrato */
 .retrato{
   margin:0;position:relative;overflow:hidden;
@@ -793,13 +805,11 @@ footer p{margin:0;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;
     </figure>
   </section>
 
-  <figure class="banda col">
-    <img src="media/movil.jpg"
-         srcset="media/movil-sm.jpg 900w, media/movil.jpg 1600w"
-         sizes="(max-width: 700px) 100vw, 1180px"
-         width="1536" height="1024" loading="lazy" decoding="async"
-         alt="Un móvil abierto sobre la esterilla con la pantalla separada del chasis, junto a las púas, la ventosa y la cinta de doble cara.">
-    <figcaption>Un cambio de pantalla, con el conjunto ya separado</figcaption>
+  <figure class="spot col">
+    <video id="spot" poster="media/spot-poster.jpg" width="1280" height="720"
+           muted loop playsinline preload="none"
+           aria-label="Spot de treinta segundos: un móvil con la pantalla rota, el precio cerrado antes de repararlo, y la pantalla nueva funcionando."></video>
+    <figcaption>Treinta segundos, sin sonido</figcaption>
   </figure>
 
   <section class="col rule" id="tarifas">
@@ -1072,6 +1082,25 @@ function alDesplazar(){
 addEventListener('scroll', alDesplazar, { passive:true });
 addEventListener('resize', alDesplazar, { passive:true });
 if (!quieto.matches) mover();
+
+/* ── Spot ────────────────────────────────────────────────────────
+   1,1 MB que no tienen por qué descargarse si nadie llega a verlo. */
+const spot = document.getElementById('spot');
+if (spot){
+  let pedido = false;
+  const traerSpot = () => {
+    if (pedido) return;
+    pedido = true;
+    spot.src = innerWidth < 900 ? 'media/spot-movil.mp4' : 'media/spot.mp4';
+    spot.play().catch(() => {});
+  };
+  const ojo = new IntersectionObserver((e, obs) => {
+    if (e[0].isIntersecting){ traerSpot(); obs.disconnect(); }
+  }, { rootMargin: '300px' });
+  ojo.observe(spot);
+  // Respaldo, por si el observador no llega a dispararse.
+  addEventListener('load', () => setTimeout(() => { ojo.disconnect(); traerSpot(); }, 2500));
+}
 
 /* ── Mapa de la zona ───────────────────────────────────────────────
    MapLibre es el motor que hay debajo de mapcn; mapcn en sí es React
