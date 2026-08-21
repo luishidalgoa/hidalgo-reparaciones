@@ -848,7 +848,7 @@ footer a:hover{color:var(--amber)}
   </section>
 
   <section class="cine" aria-label="Spot">
-    <video id="spot" poster="media/spot-poster.jpg?v=4" width="1280" height="720"
+    <video id="spot" poster="media/spot-poster.jpg?v=5" width="1280" height="720"
            muted loop playsinline preload="none"
            aria-label="Spot: un móvil con la pantalla rota, el precio cerrado antes de repararlo, y la pantalla nueva funcionando."></video>
   </section>
@@ -1103,7 +1103,7 @@ footer a:hover{color:var(--amber)}
    que ya tiene guardado. Subir este número lo obliga a pedirlo otra vez.
    Va aquí arriba a propósito: un const usado antes de declararlo aborta el
    módulo entero, y con él la barra, el parallax, el carrusel y el mapa. */
-const VER = '4';
+const VER = '5';
 
 /* ── Barra que se encoge (centinela de 1px, sin escuchar scroll) ── */
 const barra = document.getElementById('barra');
@@ -1165,7 +1165,14 @@ if (cine && spot){
   const traerSpot = () => {
     if (pedido) return;
     pedido = true;
-    spot.src = (innerWidth < 900 ? 'media/spot-movil.mp4' : 'media/spot.mp4') + '?v=' + VER;
+    /* Tres tamaños. La sección amplía el vídeo un 142 % para que le sobre
+       recorrido al parallax, así que en pantalla grande hace falta 1080p:
+       con 720p ampliado, el texto del spot se emborrona. */
+    const ancho = innerWidth * (devicePixelRatio > 1.5 ? 1.5 : 1);
+    const copia = ancho < 900  ? 'spot-movil'
+                : ancho < 1500 ? 'spot-1280'
+                :                'spot-1920';
+    spot.src = 'media/' + copia + '.mp4?v=' + VER;
     spot.play().catch(() => {});
   };
   const ojo = new IntersectionObserver((e, obs) => {
