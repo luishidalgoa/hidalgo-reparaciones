@@ -1099,6 +1099,12 @@ footer a:hover{color:var(--amber)}
 </div>
 
 <script type="module">
+/* Al reemplazar un vídeo con el mismo nombre, el navegador sigue usando el
+   que ya tiene guardado. Subir este número lo obliga a pedirlo otra vez.
+   Va aquí arriba a propósito: un const usado antes de declararlo aborta el
+   módulo entero, y con él la barra, el parallax, el carrusel y el mapa. */
+const VER = '4';
+
 /* ── Barra que se encoge (centinela de 1px, sin escuchar scroll) ── */
 const barra = document.getElementById('barra');
 const centinela = document.getElementById('centinela');
@@ -1152,9 +1158,6 @@ if (!quieto.matches) mover();
 
 /* ── Spot en su sección, con parallax ─────────────────────────────
    1,1 MB que no tienen por qué descargarse si nadie llega a verlos. */
-/* Al reemplazar un vídeo con el mismo nombre, el navegador sigue usando el
-   que ya tiene guardado. Subir este número lo obliga a pedirlo otra vez. */
-const VER = '4';
 const cine = document.querySelector('.cine');
 const spot = document.getElementById('spot');
 if (cine && spot){
