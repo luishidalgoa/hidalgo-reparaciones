@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Condiciones del servicio · Hidalgo Reparaciones</title>
+<meta name="description" content="Condiciones del servicio de reparación de móviles, ordenadores y consolas de Hidalgo Reparaciones, en Córdoba: presupuesto, pago, desistimiento, garantía y envíos.">
+<link rel="canonical" href="https://reparaciones.hdglabs.com/condiciones/">
+<meta name="robots" content="index, follow">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><rect width='48' height='48' rx='9' fill='%23E8A33D'/><path fill='%2317130B' d='M6 8h15v3.5h-4.5v9.75h15V11.5H27V8h15v3.5h-4.5v25H42V40H27v-3.5h4.5v-11.5h-15v11.5H21V40H6v-3.5h4.5v-25H6z'/></svg>">
+
+<style>
+:root{
+  --void:#08090C; --panel:#101218; --edge:#1E212A;
+  --ink:#EAE7E1; --ink-2:#9A968E; --ink-3:#5E5B57;
+  --amber:#E8A33D; --amber-deep:#8A5D1C; --on-amber:#17130B;
+  --f-display:"Instrument Serif",Georgia,serif;
+  --f-body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",Consolas,monospace;
+  --gutter:clamp(20px,4.5vw,52px);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+body{
+  margin:0;background:var(--void);color:var(--ink);
+  font-family:var(--f-body);font-size:17px;line-height:1.68;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--amber)}
+a:hover{color:#F3B457}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+.barra{
+  border-bottom:1px solid var(--edge);
+  padding:18px var(--gutter);
+  display:flex;align-items:center;gap:12px;
+}
+.marca{display:inline-flex;align-items:center;gap:9px;font-family:var(--f-display);font-size:19px;text-decoration:none;color:var(--ink)}
+.marca svg{width:19px;height:19px;flex:none}
+.volver{margin-left:auto;font-size:13.5px;text-decoration:none;color:var(--ink-2)}
+.volver:hover{color:var(--amber)}
+
+.hoja{width:min(74ch,100% - var(--gutter)*2);margin:0 auto;padding:clamp(44px,7vw,72px) 0 90px}
+
+h1{
+  font-family:var(--f-display);font-weight:400;
+  font-size:clamp(2.1rem,5.5vw,3rem);line-height:1.08;
+  letter-spacing:-.02em;margin:0 0 10px;text-wrap:balance;
+}
+.fecha{margin:0 0 40px;font-family:var(--f-mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+
+h2{
+  font-family:var(--f-display);font-weight:400;
+  font-size:clamp(1.4rem,3.4vw,1.8rem);line-height:1.15;
+  letter-spacing:-.01em;margin:52px 0 14px;
+  padding-top:26px;border-top:1px solid var(--edge);
+}
+h3{font-size:1rem;font-weight:600;margin:26px 0 8px}
+p{margin:0 0 16px;color:#C9C5BE}
+strong{color:var(--ink);font-weight:600}
+ul{margin:0 0 18px;padding-left:20px;color:#C9C5BE}
+li{margin-bottom:7px}
+
+.indice{
+  margin:0 0 8px;padding:22px 24px;
+  border:1px solid var(--edge);border-radius:10px;background:var(--panel);
+}
+.indice ol{margin:0;padding-left:20px;columns:2;column-gap:32px}
+@media (max-width:640px){ .indice ol{columns:1} }
+.indice li{margin-bottom:6px;font-size:.94rem}
+.indice a{text-decoration:none;color:#C9C5BE}
+.indice a:hover{color:var(--amber)}
+
+.ficha{margin:0 0 18px;padding:0;list-style:none}
+.ficha li{display:flex;gap:14px;flex-wrap:wrap;padding:9px 0;border-bottom:1px solid var(--edge);margin:0}
+.ficha b{min-width:16ch;font-weight:500;color:var(--ink-2);font-size:.9rem}
+.ficha span{flex:1;min-width:0}
+
+.pendiente{
+  display:inline-block;padding:1px 9px;border-radius:5px;
+  border:1px solid var(--amber-deep);background:rgb(232 163 61 / .08);
+  color:var(--amber);font-family:var(--f-mono);font-size:.78rem;
+  letter-spacing:.06em;text-transform:uppercase;
+}
+
+.aviso{
+  margin:0 0 34px;padding:20px 22px;
+  border:1px solid var(--amber-deep);border-radius:10px;
+  background:linear-gradient(180deg, rgb(232 163 61 / .07), transparent);
+}
+.aviso p{margin:0;font-size:.95rem;color:#C9C5BE}
+.aviso p + p{margin-top:8px}
+
+blockquote{
+  margin:0 0 18px;padding:16px 20px;
+  border-left:2px solid var(--edge);background:var(--panel);
+  border-radius:0 8px 8px 0;
+  font-family:var(--f-mono);font-size:.86rem;line-height:1.7;color:var(--ink-2);
+}
+blockquote p{margin:0 0 4px;color:inherit}
+
+footer{border-top:1px solid var(--edge);padding:26px var(--gutter) 40px}
+footer p{margin:0;font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;color:var(--ink-3)}
+</style>
+</head>
+<body>
+
+<nav class="barra">
+  <a class="marca" href="/">
+    <svg viewBox="0 0 48 48" aria-hidden="true">
+      <path fill="currentColor" d="M6 8h15v3.5h-4.5v9.75h15V11.5H27V8h15v3.5h-4.5v25H42V40H27v-3.5h4.5v-11.5h-15v11.5H21V40H6v-3.5h4.5v-25H6z"/>
+      <circle cx="24" cy="23" r="4.2" fill="var(--amber)"/>
+    </svg>
+    Hidalgo
+  </a>
+  <a class="volver" href="/">← Volver a la web</a>
+</nav>
+
+<main class="hoja">
+
+  <h1>Información legal y condiciones del servicio</h1>
+  <p class="fecha">Última actualización: 21 de agosto de 2026</p>
+
+  <div class="aviso">
+    <p><strong>Documento en revisión.</strong> Faltan por completar los datos identificativos marcados más abajo y queda pendiente su revisión por un profesional colegiado.</p>
+    <p>Mientras tanto, lo que rige es lo que acordemos por escrito en el presupuesto: precio y plazo cerrados antes de empezar, y si no lo arreglo, no cobro.</p>
+  </div>
+
+  <nav class="indice" aria-label="Índice">
+    <ol>
+      <li><a href="#aviso-legal">Aviso legal</a></li>
+      <li><a href="#que-contratas">Qué contratas</a></li>
+      <li><a href="#presupuesto">Presupuesto y aceptación</a></li>
+      <li><a href="#precios">Precios y forma de pago</a></li>
+      <li><a href="#aranceles">Pagos por adelantado</a></li>
+      <li><a href="#desistimiento">Derecho de desistimiento</a></li>
+      <li><a href="#garantia">Garantía de la reparación</a></li>
+      <li><a href="#envios">Transporte y envíos</a></li>
+      <li><a href="#datos">Datos y copias de seguridad</a></li>
+      <li><a href="#no-hago">Trabajos que no realizo</a></li>
+      <li><a href="#no-recogidos">Aparatos no recogidos</a></li>
+      <li><a href="#reclamaciones">Reclamaciones</a></li>
+      <li><a href="#ley">Ley aplicable</a></li>
+    </ol>
+  </nav>
+
+  <h2 id="aviso-legal">1. Aviso legal</h2>
+  <ul class="ficha">
+    <li><b>Titular</b> <span>Luis Hidalgo Aguilar</span></li>
+    <li><b>NIF</b> <span class="pendiente">Pendiente</span></li>
+    <li><b>Notificaciones</b> <span class="pendiente">Pendiente</span></li>
+    <li><b>Correo</b> <span><a href="mailto:luishidalgoa@outlook.es">luishidalgoa@outlook.es</a></span></li>
+    <li><b>WhatsApp</b> <span>680 264 323</span></li>
+    <li><b>Sitio web</b> <span>reparaciones.hdglabs.com</span></li>
+  </ul>
+  <p>No dispongo de establecimiento abierto al público: los encargos se acuerdan por WhatsApp o correo electrónico, y la entrega se realiza en mano en Córdoba capital o mediante empresa de mensajería.</p>
+
+  <h2 id="que-contratas">2. Qué contratas</h2>
+  <p>Contratas un <strong>servicio de reparación</strong> de teléfonos móviles, ordenadores y videoconsolas.</p>
+  <p>No vendo aparatos ni piezas por separado. Los repuestos necesarios van incluidos en el precio del arreglo y solo se instalan sobre tu propio aparato.</p>
+  <p>Esto tiene una consecuencia práctica: aquí no existe «devolución de un producto». Lo que se te devuelve, cuando procede, es tu aparato.</p>
+
+  <h2 id="presupuesto">3. Presupuesto y aceptación</h2>
+  <p>Antes de intervenir te comunico <strong>precio y plazo cerrados</strong>. Examinar el aparato y elaborar ese presupuesto no tiene coste.</p>
+  <p>El presupuesto aceptado no se modifica. Si al abrir el aparato aparece una avería distinta o más trabajo del previsto, detengo la intervención y te presento un presupuesto nuevo. Decides si continúas. Si no aceptas, te devuelvo el aparato en el estado en que lo recibí y no abonas mano de obra.</p>
+  <p>Antes de abrir el aparato le hago fotografías y te las envío, de modo que ambos tengamos constancia del estado en que llegó.</p>
+  <p>Se entiende aceptado el presupuesto cuando lo confirmas por escrito por WhatsApp o correo.</p>
+
+  <h2 id="precios">4. Precios y forma de pago</h2>
+  <p>Los precios publicados en la web se refieren a entrega en mano en Córdoba capital y no incluyen portes.</p>
+  <p>El pago se realiza <strong>al recoger el aparato</strong>, en efectivo o por Bizum, después de que compruebes conmigo que funciona.</p>
+  <p>Si no consigo reparar la avería, <strong>no cobro la mano de obra</strong> y te devuelvo el aparato.</p>
+  <p>La única cantidad que puede solicitarse por adelantado es la descrita en el apartado siguiente.</p>
+
+  <h2 id="aranceles">5. Pagos por adelantado: aranceles de importación</h2>
+  <p>Algunos repuestos deben traerse de fuera de la Unión Europea. En esos casos te solicito por adelantado <strong>únicamente la tasa arancelaria y los tributos de importación</strong> que corresponde abonar en aduana. No se cobra por adelantado ni el repuesto ni la mano de obra.</p>
+  <ul>
+    <li>Te comunico el importe exacto antes de cursar ningún pedido. Si no lo aceptas, no se encarga nada.</li>
+    <li>Si desistes <strong>antes de que haya cursado el pedido</strong>, te devuelvo el anticipo íntegro.</li>
+    <li>Una vez despachada la mercancía en aduana, ese arancel ya se ha abonado a la Administración y <strong>no es recuperable</strong>, por lo que no procede su devolución. En tal caso te entrego la pieza junto con el justificante del pago.</li>
+  </ul>
+
+  <h2 id="desistimiento">6. Derecho de desistimiento</h2>
+  <p>Dado que los encargos se cierran a distancia o fuera de establecimiento, con carácter general dispones de <strong>14 días naturales</strong> para desistir sin necesidad de justificar tu decisión, conforme al artículo 102 del texto refundido de la Ley General para la Defensa de los Consumidores y Usuarios. El plazo se cuenta desde la celebración del contrato.</p>
+  <p>El artículo 103 establece excepciones que aquí resultan aplicables.</p>
+
+  <h3>6.1. Reparación solicitada expresamente</h3>
+  <p>Cuando me solicitas expresamente que repare tu aparato y aceptas que comience antes de que transcurran los 14 días, pierdes el derecho de desistimiento <strong>una vez ejecutado por completo el servicio</strong> (artículo 103.a). Te advierto de ello por escrito al presentarte el presupuesto y necesito tu aceptación expresa para comenzar.</p>
+
+  <h3>6.2. Servicios o piezas no solicitados</h3>
+  <p>Si durante la reparación se prestara un servicio adicional o se instalara una pieza distinta de los repuestos necesarios para el arreglo solicitado, <strong>sobre ello conservas el derecho de desistimiento</strong> (artículo 103.b).</p>
+
+  <h3>6.3. Desistimiento con el trabajo ya iniciado</h3>
+  <p>Si desistes cuando la reparación ha comenzado pero no ha concluido, abonarás la parte proporcional del servicio ya prestado, calculada sobre el precio total acordado (artículo 108.3).</p>
+
+  <h3>6.4. Cómo ejercerlo</h3>
+  <p>Basta con que me lo comuniques por WhatsApp o correo mediante una declaración inequívoca. Puedes emplear este modelo:</p>
+  <blockquote>
+    <p>A la atención de Luis Hidalgo Aguilar (luishidalgoa@outlook.es):</p>
+    <p>Por la presente le comunico que desisto del contrato de prestación del servicio de reparación de [aparato y modelo], solicitado el [fecha].</p>
+    <p>Nombre del consumidor:</p>
+    <p>Domicilio:</p>
+    <p>Fecha:</p>
+  </blockquote>
+  <p>Te reintegraré las cantidades que correspondan en un plazo máximo de 14 días naturales desde la recepción de tu comunicación, por el mismo medio de pago empleado, salvo que acordemos otro distinto.</p>
+
+  <h2 id="garantia">7. Garantía de la reparación</h2>
+  <p>Toda reparación queda cubierta por una <strong>garantía de tres meses</strong> desde la entrega del aparato, conforme a la normativa estatal de defensa de los consumidores.</p>
+  <p>Durante ese plazo, si se manifiesta de nuevo la <strong>misma avería</strong> que reparé, la reparo otra vez sin coste alguno para ti, incluidos mano de obra y repuestos.</p>
+  <p>La garantía <strong>no cubre</strong>:</p>
+  <ul>
+    <li>Averías distintas de la reparada.</li>
+    <li>Daños por golpes, caídas, humedad o líquidos posteriores a la entrega.</li>
+    <li>Uso indebido, sobretensiones o fuerza mayor.</li>
+    <li>Aparatos manipulados por un tercero con posterioridad a mi intervención.</li>
+    <li>Desgaste normal de componentes consumibles.</li>
+  </ul>
+  <p>Para reclamar la garantía basta con que me escribas indicando la fecha de la reparación anterior.</p>
+  <p>Esta garantía cubre mi trabajo y es independiente de la garantía legal que el fabricante o el vendedor original te deban por el aparato. Si tu aparato continúa en garantía del fabricante, te lo indicaré y te recomendaré acudir primero al servicio oficial.</p>
+
+  <h2 id="envios">8. Transporte y envíos</h2>
+  <p>Si te encuentras fuera de Córdoba, puedo realizar la reparación por mensajería.</p>
+  <ul>
+    <li>El <strong>porte de ida y vuelta queda a tu cargo</strong>. Te calculo el importe antes de cerrar el encargo.</li>
+    <li>Eres responsable de embalar el aparato de forma adecuada para el transporte.</li>
+    <li>Los daños producidos durante el transporte son responsabilidad de la empresa de mensajería. Te recomiendo contratar un seguro sobre el envío.</li>
+    <li>Al recibir el aparato lo reviso y te envío fotografías de su estado antes de abrirlo.</li>
+  </ul>
+
+  <h2 id="datos">9. Datos y copias de seguridad</h2>
+  <p><strong>Realiza una copia de seguridad de tus datos antes de entregarme el aparato.</strong> Trabajo con la máxima diligencia, pero una reparación puede conllevar pérdida de información, y no presto servicio de recuperación de datos.</p>
+  <p>No respondo de la pérdida, borrado o alteración de datos, archivos, contraseñas o licencias, salvo que la pérdida obedezca a negligencia demostrada por mi parte.</p>
+  <p>Si por necesidad técnica accedo a tus datos, no los copio, no los conservo y no los comunico a terceros.</p>
+  <p>El tratamiento de tus datos personales (nombre, teléfono, correo y fotografías del aparato) se regirá por la política de privacidad: <span class="pendiente">Pendiente de publicar</span></p>
+
+  <h2 id="no-hago">10. Trabajos que no realizo</h2>
+  <p>No realizo reparaciones por daños de líquidos, recuperación de datos ni trabajo a nivel de placa base. Si tu avería es de ese tipo te lo comunico desde el principio, no acepto el encargo y te oriento sobre dónde acudir.</p>
+
+  <h2 id="no-recogidos">11. Aparatos no recogidos</h2>
+  <p>Si no recoges tu aparato ni respondes a mis avisos en el plazo de <strong>tres meses</strong> desde que te comunico que está listo, te remitiré un requerimiento por correo. Conservaré el aparato durante <strong>tres meses</strong> más desde dicho requerimiento.</p>
+
+  <h2 id="reclamaciones">12. Reclamaciones y resolución de conflictos</h2>
+  <p>Si algo no ha ido bien, escríbeme primero: la mayoría de las cosas se resuelven hablando.</p>
+  <p>Si no alcanzamos un acuerdo, tienes a tu disposición:</p>
+  <ul>
+    <li>Las <strong>hojas de quejas y reclamaciones</strong> de la Junta de Andalucía, que puedo facilitarte.</li>
+    <li>La Oficina Municipal de Información al Consumidor de Córdoba.</li>
+    <li>La plataforma europea de resolución de litigios en línea: <a href="https://ec.europa.eu/consumers/odr" rel="noopener">ec.europa.eu/consumers/odr</a></li>
+  </ul>
+
+  <h2 id="ley">13. Ley aplicable</h2>
+  <p>Estas condiciones se rigen por la legislación española. Para cualquier controversia serán competentes los juzgados y tribunales del domicilio del consumidor.</p>
+
+</main>
+
+<footer>
+  <p>Hidalgo · Reparación de móviles, PC y consolas · Córdoba</p>
+</footer>
+
+</body>
+</html>
