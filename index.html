@@ -771,7 +771,12 @@ footer a:hover{color:var(--amber)}
 .dock .p{background:var(--amber);color:var(--on-amber)}
 .dock .s{border:1px solid var(--edge);color:var(--ink)}
 @media (min-width:900px){ .dock{display:none} }
-@media (max-width:899px){ body{padding-bottom:74px} }
+@media (max-width:899px){
+  body{padding-bottom:74px}
+  /* El hero mide 100svh, o sea la ventana entera, así que su fila de abajo
+     cae justo bajo el dock fijo y queda tapada. Le reserva su altura. */
+  .hero{padding-bottom:calc(var(--gutter) + 80px)}
+}
 </style>
 </head>
 <body>
