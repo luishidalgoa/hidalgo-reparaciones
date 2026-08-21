@@ -1203,18 +1203,23 @@ const candidatos = document.querySelectorAll(
 );
 if (!quieto.matches && candidatos.length){
   candidatos.forEach(el => el.classList.add('sube'));
+  let vivo = false;
   const revelar = new IntersectionObserver((entradas, obs) => {
     entradas.forEach(e => {
       if (!e.isIntersecting) return;
+      vivo = true;
       e.target.classList.add('dentro');
       obs.unobserve(e.target);
     });
   }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
   candidatos.forEach(el => revelar.observe(el));
 
-  /* Respaldo: si el observador no llega a dispararse, nada puede
-     quedarse invisible para siempre. */
+  /* Respaldo por si el observador no llega a dispararse nunca. Solo actúa
+     si NO ha disparado ni una vez: antes revelaba todo a los 4 segundos, y
+     como el hero se mira más rato que eso, al bajar ya estaba todo puesto
+     y no se veía una sola animación. */
   addEventListener('load', () => setTimeout(() => {
+    if (vivo) return;
     candidatos.forEach(el => el.classList.add('dentro'));
   }, 4000));
 }
