@@ -848,7 +848,7 @@ footer a:hover{color:var(--amber)}
   </section>
 
   <section class="cine" aria-label="Spot">
-    <video id="spot" poster="media/spot-poster.jpg" width="1280" height="720"
+    <video id="spot" poster="media/spot-poster.jpg?v=4" width="1280" height="720"
            muted loop playsinline preload="none"
            aria-label="Spot: un móvil con la pantalla rota, el precio cerrado antes de repararlo, y la pantalla nueva funcionando."></video>
   </section>
@@ -1110,7 +1110,7 @@ new IntersectionObserver(([e]) => {
    Aun comprimido, el de escritorio pesa el triple: a ese tamaño de pantalla
    la copia de 768 px es indistinguible. */
 const video = document.getElementById('fuente');
-video.src = innerWidth < 900 ? 'media/taller-movil.mp4' : 'media/taller.mp4';
+video.src = (innerWidth < 900 ? 'media/taller-movil.mp4' : 'media/taller.mp4') + '?v=' + VER;
 video.play().catch(() => {});
 
 /* ── Parallax del hero ─────────────────────────────────────────────
@@ -1152,6 +1152,9 @@ if (!quieto.matches) mover();
 
 /* ── Spot en su sección, con parallax ─────────────────────────────
    1,1 MB que no tienen por qué descargarse si nadie llega a verlos. */
+/* Al reemplazar un vídeo con el mismo nombre, el navegador sigue usando el
+   que ya tiene guardado. Subir este número lo obliga a pedirlo otra vez. */
+const VER = '4';
 const cine = document.querySelector('.cine');
 const spot = document.getElementById('spot');
 if (cine && spot){
@@ -1159,7 +1162,7 @@ if (cine && spot){
   const traerSpot = () => {
     if (pedido) return;
     pedido = true;
-    spot.src = innerWidth < 900 ? 'media/spot-movil.mp4' : 'media/spot.mp4';
+    spot.src = (innerWidth < 900 ? 'media/spot-movil.mp4' : 'media/spot.mp4') + '?v=' + VER;
     spot.play().catch(() => {});
   };
   const ojo = new IntersectionObserver((e, obs) => {
