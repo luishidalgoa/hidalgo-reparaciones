@@ -477,14 +477,21 @@ section{padding-block:clamp(64px,9vw,112px)}
    scroll: al pasar por delante deja ver zonas distintas del plano. */
 .cine{
   position:relative;overflow:hidden;
-  height:min(88vh,760px);
+  /* Más baja que antes: así en la mayoría de pantallas el vídeo, que entra
+     completo a lo ancho, sobresale por arriba y por abajo y ese sobrante es
+     el recorrido del parallax. */
+  height:min(64vh,620px);
   margin-block:clamp(60px,9vw,110px);
   background:#050a14;
   border-block:1px solid var(--edge);
 }
 .cine video{
   position:absolute;top:50%;left:50%;
-  width:106%;height:auto;min-height:142%;
+  /* El ancho manda y la altura sale de la proporción: así el plano entra
+     entero de lado a lado y no se pierde el logo del cierre, que va a la
+     derecha. Antes forzaba la altura y era object-fit quien recortaba los
+     lados. El min-height solo entra en pantallas muy apaisadas. */
+  width:100%;height:auto;min-height:100%;
   object-fit:cover;
   transform:translate(-50%,-50%);
   will-change:transform;
