@@ -484,7 +484,7 @@ section{padding-block:clamp(64px,9vw,112px)}
 }
 .cine video{
   position:absolute;top:50%;left:50%;
-  width:106%;height:auto;min-height:118%;
+  width:106%;height:auto;min-height:142%;
   object-fit:cover;
   transform:translate(-50%,-50%);
   will-change:transform;
@@ -1183,7 +1183,11 @@ if (cine && spot){
     const r = cine.getBoundingClientRect();
     if (r.bottom < -200 || r.top > innerHeight + 200) return;
     const centro = r.top + r.height / 2 - innerHeight / 2;
-    const avance = -centro * 0.16;
+    /* El recorrido se limita al margen real que sobra del vídeo. Sin este
+       tope, con factores altos el vídeo se despega del borde de la sección
+       y asoma el fondo. */
+    const margen = Math.max(0, (spot.offsetHeight - r.height) / 2);
+    const avance = Math.max(-margen, Math.min(margen, -centro * 0.3));
     spot.style.transform = 'translate(-50%, calc(-50% + ' + avance.toFixed(1) + 'px))';
   };
   const pedirEncuadre = () => {
