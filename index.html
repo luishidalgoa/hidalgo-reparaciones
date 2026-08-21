@@ -27,11 +27,91 @@
 
 <script type="application/ld+json">
 {
-  "@context":"https://schema.org","@type":"LocalBusiness",
-  "name":"Hidalgo — Reparaciones",
-  "description":"Reparación de móviles, ordenadores y consolas en Córdoba.",
-  "email":"luishidalgoa@outlook.es","priceRange":"20 € - 400 €",
-  "areaServed":{"@type":"City","name":"Córdoba","address":{"@type":"PostalAddress","addressLocality":"Córdoba","addressRegion":"Andalucía","addressCountry":"ES"}}
+ "@context": "https://schema.org",
+ "@type": [
+  "LocalBusiness",
+  "ComputerRepairService"
+ ],
+ "name": "Hidalgo — Reparaciones",
+ "description": "Reparación de móviles, ordenadores y consolas en Córdoba. Drift de mandos con stick de efecto Hall, cambio de pantalla, baterías, limpieza y pasta térmica, SSD e instalación de Windows.",
+ "url": "https://reparaciones.hdglabs.com/",
+ "email": "luishidalgoa@outlook.es",
+ "image": "https://reparaciones.hdglabs.com/media/compartir.jpg",
+ "logo": "https://reparaciones.hdglabs.com/logo.svg",
+ "priceRange": "8 € - 400 €",
+ "currenciesAccepted": "EUR",
+ "paymentAccepted": "Efectivo, Bizum",
+ "areaServed": {
+  "@type": "City",
+  "name": "Córdoba",
+  "address": {
+   "@type": "PostalAddress",
+   "addressLocality": "Córdoba",
+   "addressRegion": "Andalucía",
+   "addressCountry": "ES"
+  }
+ },
+ "knowsAbout": [
+  "reparación de móviles",
+  "cambiar pantalla de móvil",
+  "drift de mandos",
+  "stick de efecto Hall",
+  "Joy-Con",
+  "Nintendo Switch",
+  "PS5",
+  "Xbox",
+  "pasta térmica",
+  "limpieza de portátiles",
+  "instalar SSD",
+  "clonado de disco duro",
+  "instalación de Windows"
+ ],
+ "hasOfferCatalog": {
+  "@type": "OfferCatalog",
+  "name": "Tarifas",
+  "itemListElement": [
+   {
+    "@type": "Offer",
+    "price": "20",
+    "priceCurrency": "EUR",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "Reparación del drift de mandos con stick de efecto Hall"
+    }
+   },
+   {
+    "@type": "Offer",
+    "price": "10",
+    "priceCurrency": "EUR",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "Limpieza interna y cambio de pasta térmica"
+    }
+   },
+   {
+    "@type": "Offer",
+    "price": "40",
+    "priceCurrency": "EUR",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "Instalación de SSD y clonado del sistema"
+    }
+   },
+   {
+    "@type": "Offer",
+    "price": "8",
+    "priceCurrency": "EUR",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "Instalación limpia de Windows"
+    }
+   },
+   {
+    "@type": "Service",
+    "name": "Cambio de pantalla, batería o teclado"
+   }
+  ]
+ }
 }
 </script>
 
@@ -53,7 +133,7 @@
    "name": "¿Y si al final no tiene arreglo?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "Te lo devuelvo como estaba y no me pagas la mano de obra. Si para averiguarlo hacía falta comprar una pieza cara, eso lo hablamos antes de encargarla y no después."
+    "text": "Si no consigo repararlo, te lo devuelvo como estaba y no me pagas la mano de obra. Si para averiguarlo hacía falta comprar una pieza cara, eso lo hablamos antes de encargarla y no después."
    }
   },
   {
@@ -85,7 +165,7 @@
    "name": "¿Y si no vivo en Córdoba?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "También te lo arreglo, pero el porte de ida y vuelta lo pagas tú y te lo calculo antes de cerrar nada. Para un mando suele compensar; para un portátil, casi nunca."
+    "text": "También te lo reparo, pero el porte de ida y vuelta lo pagas tú y te lo calculo antes de cerrar nada. Para un mando suele compensar; para un portátil, casi nunca."
    }
   }
  ]
@@ -872,7 +952,7 @@ footer a:hover{color:var(--amber)}
     <ul class="tarifas">
       <li class="tar">
         <span class="tar-n">01</span>
-        <span class="tar-c"><b>Drift de mandos</b><span>Le pongo un stick de efecto Hall, que trabaja por imán y no roza contra nada. Ese mando ya no vuelve a driftear. Joy-Con, Pro Controller, PS5 y Xbox.</span></span>
+        <span class="tar-c"><b>Drift de mandos</b><span>Le pongo un stick de efecto Hall, que trabaja por imán y no roza contra nada. Ese mando ya no vuelve a driftear. Joy-Con y Pro Controller de Nintendo Switch, mandos de PS5 y de Xbox.</span></span>
         <span class="tar-p">desde 20 €</span>
       </li>
       <li class="tar">
@@ -882,7 +962,7 @@ footer a:hover{color:var(--amber)}
       </li>
       <li class="tar">
         <span class="tar-n">03</span>
-        <span class="tar-c"><b>SSD y clonado de tu sistema</b><span>Paso tu Windows tal cual: programas, archivos y contraseñas siguen donde estaban. El disco no va incluido, te digo cuál comprar.</span></span>
+        <span class="tar-c"><b>SSD y clonado de tu sistema</b><span>Cambio el disco duro por un SSD y paso tu Windows tal cual: programas, archivos y contraseñas siguen donde estaban. El disco no va incluido, te digo cuál comprar.</span></span>
         <span class="tar-p">40 €</span>
       </li>
       <li class="tar">
@@ -892,7 +972,7 @@ footer a:hover{color:var(--amber)}
       </li>
       <li class="tar">
         <span class="tar-n">05</span>
-        <span class="tar-c"><b>Pantallas, baterías y teclados</b><span>Dime el modelo exacto y te busco la pieza. Te paso precio cerrado y cuánto tarda en llegar.</span></span>
+        <span class="tar-c"><b>Pantallas, baterías y teclados</b><span>Si tienes la pantalla rota, del móvil o de la tablet, dime el modelo exacto y te busco la pieza. Cambiar una pantalla lleva su tiempo, así que te paso precio cerrado y cuánto tarda en llegar.</span></span>
         <span class="tar-p tenue">según modelo</span>
       </li>
     </ul>
@@ -1001,7 +1081,7 @@ footer a:hover{color:var(--amber)}
       </div>
       <div>
         <dt>¿Y si al final no tiene arreglo?</dt>
-        <dd>Te lo devuelvo como estaba y no me pagas la mano de obra. Si para averiguarlo hacía falta comprar una pieza cara, eso lo hablamos antes de encargarla y no después.</dd>
+        <dd>Si no consigo repararlo, te lo devuelvo como estaba y no me pagas la mano de obra. Si para averiguarlo hacía falta comprar una pieza cara, eso lo hablamos antes de encargarla y no después.</dd>
       </div>
       <div>
         <dt>¿Dónde quedamos?</dt>
@@ -1017,7 +1097,7 @@ footer a:hover{color:var(--amber)}
       </div>
       <div>
         <dt>¿Y si no vivo en Córdoba?</dt>
-        <dd>También te lo arreglo, pero el porte de ida y vuelta lo pagas tú y te lo calculo antes de cerrar nada. Para un mando suele compensar; para un portátil, casi nunca.</dd>
+        <dd>También te lo reparo, pero el porte de ida y vuelta lo pagas tú y te lo calculo antes de cerrar nada. Para un mando suele compensar; para un portátil, casi nunca.</dd>
       </div>
     </dl>
   </section>
