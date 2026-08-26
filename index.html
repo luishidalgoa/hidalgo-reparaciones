@@ -244,7 +244,7 @@ a{color:inherit}
 /* El scale(1.07) no es decorativo: al desplazarse, una capa del tamaño justo
    deja al descubierto una franja donde el color corta en seco. */
 .c1{
-  background:radial-gradient(at 18% 22%, #1E2530 0px, transparent 52%);
+  background:radial-gradient(at 18% 22%, #2A2016 0px, transparent 52%);
   animation:vagar1 29s ease-in-out 0s infinite alternate;
 }
 @keyframes vagar1{
@@ -252,7 +252,7 @@ a{color:inherit}
   to  {transform:scale(1.07) translate(1.6%, -1.65%)}
 }
 .c2{
-  background:radial-gradient(at 82% 78%, #141A22 0px, transparent 55%);
+  background:radial-gradient(at 82% 78%, #1F1712 0px, transparent 55%);
   animation:vagar2 37s ease-in-out -7s infinite alternate;
 }
 @keyframes vagar2{
@@ -273,37 +273,40 @@ a{color:inherit}
    circunferencia perfecta; girándolas, la silueta cambia sola. */
 .fluido{
   position:absolute;inset:-25%;
-  filter:blur(54px);
+  filter:blur(58px) saturate(1.25);
 }
 /* screen entre ellas: donde se cruzan, las luces se suman en vez de
-   taparse, y ahí es donde aparecen los nervios claros del fluido. */
+   taparse. Con colores cálidos eso es justo lo que da la sobreexposición:
+   el naranja y el amarillo se solapan y el cruce se va hacia el blanco
+   caliente, como una foto quemada de luz. */
 .fluido i{
   position:absolute;display:block;mix-blend-mode:screen;
   border-radius:56% 44% 62% 38% / 47% 58% 42% 53%;
 }
-/* Caída rápida (transparent al 62-70%) para que la mancha tenga borde y
-   se le vea la silueta. Con caídas largas el fondo entero se lavaba de
-   gris y no se distinguía forma ninguna. */
+/* El naranja de la casa, el mismo del botón de WhatsApp. Es la mancha
+   grande, la que manda. */
 .b1{
-  width:44%;height:40%;left:4%;top:8%;
-  background:radial-gradient(closest-side, rgb(226 238 250 / .40), rgb(146 176 204 / .12) 58%, transparent 70%);
+  width:46%;height:42%;left:2%;top:6%;
+  background:radial-gradient(closest-side, rgb(228 153 42 / .52), rgb(198 118 30 / .18) 56%, transparent 72%);
   animation:fluir1 34s ease-in-out infinite alternate;
 }
+/* Amarillo. Va por delante del naranja y es lo que levanta la exposición. */
 .b2{
-  width:36%;height:46%;left:46%;top:26%;
-  background:radial-gradient(closest-side, rgb(198 220 240 / .32), rgb(116 146 178 / .09) 56%, transparent 68%);
+  width:34%;height:44%;left:44%;top:22%;
+  background:radial-gradient(closest-side, rgb(245 197 79 / .44), rgb(214 156 44 / .14) 54%, transparent 70%);
   animation:fluir2 43s ease-in-out -9s infinite alternate;
 }
+/* Granizada de fresa. Entra por abajo y le quita el aire de puesta de sol
+   de postal, que con solo naranja y amarillo es donde acababa esto. */
 .b3{
-  width:52%;height:28%;left:16%;top:56%;
-  background:radial-gradient(closest-side, rgb(170 200 226 / .24), transparent 66%);
+  width:54%;height:30%;left:14%;top:54%;
+  background:radial-gradient(closest-side, rgb(228 88 122 / .34), rgb(190 60 96 / .10) 58%, transparent 72%);
   animation:fluir3 51s ease-in-out -21s infinite alternate;
 }
-/* El núcleo: pequeño y más intenso. Es el que da la sensación de que la
-   masa tiene interior y no es una nube plana. */
+/* El núcleo quemado: pequeño, casi blanco caliente. */
 .b4{
-  width:20%;height:18%;left:30%;top:30%;
-  background:radial-gradient(closest-side, rgb(240 248 255 / .34), transparent 72%);
+  width:22%;height:19%;left:28%;top:28%;
+  background:radial-gradient(closest-side, rgb(255 224 168 / .46), rgb(240 176 70 / .16) 50%, transparent 74%);
   border-radius:50% 50% 44% 56% / 58% 42% 58% 42%;
   animation:fluir4 29s ease-in-out -5s infinite alternate;
 }
