@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://reparaciones.hdglabs.com/sitemap.xml
+Sitemap: https://servicios.hdglabs.com/sitemap.xml
