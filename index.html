@@ -277,45 +277,59 @@ a{color:inherit}
    no queda fondo visible entre ellos: cada uno muere dentro del de al
    lado y lo que se ve es una superficie continua de color.
 
-   Dos capas iguales girando en sentidos contrarios: al cruzarse, los
-   nudos de color caen cada vez en un sitio y la malla nunca se repite. */
+   Lo que se anima NO es la capa. Antes giraba con transform y al rotar
+   un rectángulo sus esquinas entran en pantalla: se veía el borde del
+   cuadrado cruzando el fondo. Ahora la capa está quieta y lo que se
+   mueve es cada nudo por su cuenta, con background-position. Al ir cada
+   uno a su ritmo y en su dirección, la masa se deforma en vez de
+   desplazarse, y eso es lo que se lee como líquido. */
 .malla{
-  position:absolute;inset:-35%;
+  position:absolute;inset:0;
   background-color:#1C1109;
   filter:saturate(1.45);
+  background-repeat:no-repeat;
   background-image:
-    radial-gradient(at 14% 18%, rgb(228 153 42 / .95) 0px, transparent 52%),
-    radial-gradient(at 62% 8%,  rgb(245 197 79 / .80) 0px, transparent 48%),
-    radial-gradient(at 88% 32%, rgb(228 88 122 / .72) 0px, transparent 50%),
-    radial-gradient(at 34% 52%, rgb(255 214 138 / .70) 0px, transparent 46%),
-    radial-gradient(at 74% 66%, rgb(206 74 92 / .68) 0px, transparent 50%),
-    radial-gradient(at 8%  78%, rgb(232 163 61 / .78) 0px, transparent 52%),
-    radial-gradient(at 48% 92%, rgb(180 62 78 / .62) 0px, transparent 48%);
-  animation:mallar1 48s ease-in-out infinite alternate;
+    radial-gradient(circle at 50% 50%, rgb(228 153 42 / .95) 0px, transparent 58%),
+    radial-gradient(circle at 50% 50%, rgb(245 197 79 / .80) 0px, transparent 55%),
+    radial-gradient(circle at 50% 50%, rgb(228 88 122 / .74) 0px, transparent 56%),
+    radial-gradient(circle at 50% 50%, rgb(255 214 138 / .70) 0px, transparent 52%),
+    radial-gradient(circle at 50% 50%, rgb(206 74 92 / .70) 0px, transparent 56%),
+    radial-gradient(circle at 50% 50%, rgb(232 163 61 / .80) 0px, transparent 58%),
+    radial-gradient(circle at 50% 50%, rgb(180 62 78 / .64) 0px, transparent 54%);
+  background-size:
+    130% 120%, 105% 115%, 120% 105%, 95% 100%, 115% 125%, 125% 110%, 110% 130%;
+  background-position:
+    -14% -10%, 58% -14%, 92% 26%, 26% 46%, 74% 66%, -10% 78%, 44% 96%;
+  animation:mallar1 38s ease-in-out infinite alternate;
 }
+/* Cada nudo llega a un sitio distinto: ninguno acompaña al de al lado y
+   por eso la superficie se retuerce en vez de deslizarse en bloque. */
+@keyframes mallar1{
+  to{ background-position:
+    18% 14%, 26% 22%, 58% 8%, 62% 24%, 34% 44%, 30% 52%, 8% 66%; }
+}
+
 .malla.dos{
   background-color:transparent;
-  mix-blend-mode:screen;opacity:.62;
+  mix-blend-mode:screen;opacity:.66;
   background-image:
-    radial-gradient(at 78% 14%, rgb(245 186 66 / .82) 0px, transparent 50%),
-    radial-gradient(at 22% 40%, rgb(228 96 108 / .64) 0px, transparent 48%),
-    radial-gradient(at 58% 74%, rgb(255 198 104 / .74) 0px, transparent 46%),
-    radial-gradient(at 92% 84%, rgb(214 120 52 / .66) 0px, transparent 50%);
-  animation:mallar2 63s ease-in-out -14s infinite alternate;
-}
-@keyframes mallar1{
-  from{transform:rotate(-8deg) scale(1.05) translate(-3%, -2%)}
-  to  {transform:rotate(9deg)  scale(1.28) translate(4%, 3%)}
+    radial-gradient(circle at 50% 50%, rgb(245 186 66 / .84) 0px, transparent 56%),
+    radial-gradient(circle at 50% 50%, rgb(228 96 108 / .66) 0px, transparent 54%),
+    radial-gradient(circle at 50% 50%, rgb(255 198 104 / .76) 0px, transparent 52%),
+    radial-gradient(circle at 50% 50%, rgb(214 120 52 / .68) 0px, transparent 56%);
+  background-size:115% 110%, 100% 120%, 125% 100%, 105% 115%;
+  background-position:76% -8%, 14% 34%, 56% 72%, 96% 88%;
+  animation:mallar2 53s ease-in-out -17s infinite alternate;
 }
 @keyframes mallar2{
-  from{transform:rotate(7deg)  scale(1.22) translate(3%, 2%)}
-  to  {transform:rotate(-10deg) scale(1.04) translate(-4%, -3%)}
+  to{ background-position: 22% 26%, 68% 10%, 12% 40%, 40% 30%; }
 }
 
 /* Sin esto no se lee nada: la malla a plena luz deja el texto claro
    encima de naranjas de media luminosidad. El velo la baja de golpe pero
    respeta el color, así que el fondo sigue siendo cálido y el texto
-   vuelve a tener contraste. */
+   vuelve a tener contraste. Oscurece la franja central, por donde cae el
+   texto, y suelta los bordes, que es donde el color puede vivir. */
 .velo-fondo{
   position:absolute;inset:0;
   background:
@@ -326,19 +340,19 @@ a{color:inherit}
 }
 
 /* Fuga de luz. Las de verdad son eso: luz que se cuela por una junta del
-   chasis y cruza el fotograma en diagonal, siempre cálida y siempre
-   quemada por el centro de la banda. Van dos, con inclinaciones y ritmos
-   distintos, porque una sola se lee como un reflejo de cristal.
-
-   Va por encima del velo: si la tapara, se apagaría justo lo que tiene
-   que verse quemado. */
+   chasis y cruza el fotograma, siempre cálida y quemada por el centro de
+   la banda. También se mueve por posición y no por transform, por el
+   mismo motivo que la malla: nada de bordes girando. */
 .fuga{
-  position:absolute;inset:-20%;
-  background:
+  position:absolute;inset:0;
+  background-repeat:no-repeat;
+  background-image:
     linear-gradient(104deg, transparent 34%, rgb(255 216 156 / .20) 44%,
                     rgb(255 172 96 / .30) 50%, rgb(255 138 92 / .14) 56%, transparent 66%),
     linear-gradient(68deg, transparent 52%, rgb(255 122 138 / .16) 61%,
                     rgb(255 186 120 / .10) 66%, transparent 76%);
+  background-size:240% 240%, 260% 260%;
+  background-position:0% 40%, 100% 60%;
   mix-blend-mode:screen;
   filter:blur(26px);
   animation:fugar 31s ease-in-out infinite alternate;
@@ -346,16 +360,16 @@ a{color:inherit}
 /* La opacidad sube y baja con el recorrido: una fuga fija delata que es
    un degradado pegado encima. */
 @keyframes fugar{
-  from{transform:translate(-14%, 6%) rotate(-5deg) scale(1.05);opacity:.55}
+  from{background-position:0% 40%, 100% 60%;opacity:.55}
   50% {opacity:1}
-  to  {transform:translate(12%, -8%) rotate(6deg) scale(1.3);opacity:.7}
+  to  {background-position:100% 60%, 0% 30%;opacity:.72}
 }
 
 /* En pantallas pequeñas el blur de 72px sobre toda la ventana se nota al
    hacer scroll. Menos radio y menos capa. */
 @media (max-width:760px){
-  .malla{animation-duration:70s}
-  .malla.dos{opacity:.5}
+  .malla{animation-duration:56s}
+  .malla.dos{opacity:.52}
   .fuga{filter:blur(18px)}
 }
 
