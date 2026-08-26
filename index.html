@@ -710,8 +710,13 @@ section{padding-block:clamp(64px,9vw,112px)}
      el recorrido del parallax. */
   height:min(64vh,620px);
   margin-block:clamp(60px,9vw,110px);
-  background:#050a14;
-  border-block:1px solid var(--edge);
+  /* Antes esta caja llevaba fondo azul propio y un filete arriba y abajo.
+     Con el fondo cálido detrás, eso era un rectángulo azul recortado a
+     tijera en medio de la página. Ahora la caja no pinta nada: lo que se
+     funde es el vídeo, con una máscara que lo deja transparente en los
+     bordes para que el fondo entre por debajo. */
+  -webkit-mask-image:linear-gradient(to bottom, transparent 0%, #000 13%, #000 87%, transparent 100%);
+  mask-image:linear-gradient(to bottom, transparent 0%, #000 13%, #000 87%, transparent 100%);
 }
 .cine video{
   position:absolute;top:50%;left:50%;
@@ -724,10 +729,16 @@ section{padding-block:clamp(64px,9vw,112px)}
   transform:translate(-50%,-50%);
   will-change:transform;
 }
+/* El spot está rodado en azul y el fondo de la página es cálido: puestos
+   uno al lado del otro, chirrían. Este velo lo arrastra hacia el ámbar de
+   la casa sin apagarlo. soft-light y no color: soft-light respeta las
+   luces y las sombras del plano, así que el azul sigue ahí, solo que
+   templado. Con `color` se perdería el ambiente nocturno del vídeo. */
 .cine::after{
   content:"";position:absolute;inset:0;pointer-events:none;
+  mix-blend-mode:soft-light;opacity:.72;
   background:
-    linear-gradient(to bottom, var(--void) 0%, transparent 16%, transparent 84%, var(--void) 100%);
+    linear-gradient(160deg, rgb(232 163 61 / .85) 0%, rgb(226 62 107 / .55) 52%, rgb(247 201 72 / .70) 100%);
 }
 
 /* ══ Carrusel ═══════════════════════════════════════════════ */
