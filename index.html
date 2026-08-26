@@ -712,6 +712,47 @@ section{padding-block:clamp(64px,9vw,112px)}
   .oficio .calor,.oficio .migra,.oficio .pieza{animation:none;transform:none}
 }
 
+/* ══ Cinta de marcas ════════════════════════════════════════
+   Dos filas que corren en sentidos opuestos, en bucle infinito. El truco
+   está en duplicar la lista dentro de la pista y animar hasta -50%: al
+   llegar, la segunda copia ocupa exactamente el sitio de la primera y el
+   salto es invisible. Sin JavaScript.
+   La máscara de los lados evita que los nombres aparezcan y desaparezcan
+   de golpe contra el borde. */
+.marcas-rotulo{
+  font-family:var(--f-mono);font-size:10.5px;font-weight:500;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--ink-3);
+  margin:0 0 22px;
+}
+.cinta-marcas{overflow:hidden;padding-block:6px}
+.cinta-marcas + .cinta-marcas{margin-top:22px}
+.desfile{
+  display:flex;width:max-content;gap:0;
+  animation:desfilar 46s linear infinite;
+}
+.cinta-marcas.rev .desfile{animation-direction:reverse;animation-duration:58s}
+@keyframes desfilar{ to{transform:translateX(-50%)} }
+
+.tanda{display:flex;align-items:center;gap:clamp(30px,4.4vw,64px);padding-right:clamp(30px,4.4vw,64px)}
+.marca{
+  font-family:var(--f-body);font-weight:500;
+  font-size:clamp(.95rem,1.5vw,1.18rem);
+  letter-spacing:.16em;text-transform:uppercase;
+  color:#6E6A64;white-space:nowrap;
+  transition:color .25s ease;
+}
+.marca:hover{color:var(--ink)}
+.marca-sep{width:3px;height:3px;border-radius:50%;background:var(--edge);flex:none}
+
+/* Al pasar el ratón por encima se para: si alguien busca su marca, que
+   pueda leerla sin perseguirla. */
+.marcas-caja:hover .desfile{animation-play-state:paused}
+.marcas-caja{
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);
+}
+@media (prefers-reduced-motion: reduce){ .desfile{animation:none} }
+
 /* ══ Aparición al entrar en pantalla ════════════════════════ */
 .sube{opacity:0;transform:translateY(22px);transition:opacity .7s ease, transform .7s cubic-bezier(.22,.61,.36,1)}
 .sube.dentro{opacity:1;transform:none}
@@ -1061,6 +1102,18 @@ footer a:hover{color:var(--amber)}
         <div class="lamina"><svg viewBox="0 0 320 220" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M40 110h60" stroke="#1E212A" stroke-width=".9"/><path class="traza" pathLength="1" d="M100 110h22l10-30 14 60 12-42 10 22 8-10h104" stroke="#E8A33D" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><circle class="pulso" cx="146" cy="140" r="4" fill="#E8A33D"/></svg></div>
         <p><b>Diagnóstico</b> Si no sabes qué le pasa, lo miro y te digo qué tiene y cuánto cuesta. Mirarlo no se cobra.</p>
       </article>
+    </div>
+  </section>
+
+  <section class="col" aria-label="Marcas que reparo">
+    <p class="marcas-rotulo">Lo que pasa por la mesa</p>
+    <div class="marcas-caja">
+    <div class="cinta-marcas">
+      <div class="desfile"><div class="tanda"><span class="marca">Nintendo</span><span class="marca-sep" aria-hidden="true"></span><span class="marca">PlayStation</span><span class="marca-sep" aria-hidden="true"></span><span class="marca">Xbox</span><span class="marca-sep" aria-hidden="true"></span><span class="marca">Samsung</span><span class="marca-sep" aria-hidden="true"></span><span class="marca">Apple</span><span class="marca-sep" aria-hidden="true"></span><span class="marca">Xiaomi</span><span class="marca-sep" aria-hidden="true"></span><span class="marca">Huawei</span><span class="marca-sep" aria-hidden="true"></span><span class="marca">Realme</span><span class="marca-sep" aria-hidden="true"></span></div><div class="tanda"><span class="marca">Nintendo</span><span class="marca-sep" aria-hidden="true"></span><span class="marca">PlayStation</span><span class="marca-sep" aria-hidden="true"></span><span class="marca">Xbox</span><span class="marca-sep" aria-hidden="true"></span><span class="marca">Samsung</span><span class="marca-sep" aria-hidden="true"></span><span class="marca">Apple</span><span class="marca-sep" aria-hidden="true"></span><span class="marca">Xiaomi</span><span class="marca-sep" aria-hidden="true"></span><span class="marca">Huawei</span><span class="marca-sep" aria-hidden="true"></span><span class="marca">Realme</span><span class="marca-sep" aria-hidden="true"></span></div></div>
+    </div>
+    <div class="cinta-marcas rev">
+      <div class="desfile"><div class="tanda"><span class="marca">HP</span><span class="marca-sep" aria-hidden="true"></span><span class="marca">Lenovo</span><span class="marca-sep" aria-hidden="true"></span><span class="marca">ASUS</span><span class="marca-sep" aria-hidden="true"></span><span class="marca">Acer</span><span class="marca-sep" aria-hidden="true"></span><span class="marca">MSI</span><span class="marca-sep" aria-hidden="true"></span><span class="marca">Dell</span><span class="marca-sep" aria-hidden="true"></span><span class="marca">Surface</span><span class="marca-sep" aria-hidden="true"></span><span class="marca">Intel</span><span class="marca-sep" aria-hidden="true"></span><span class="marca">AMD</span><span class="marca-sep" aria-hidden="true"></span><span class="marca">NVIDIA</span><span class="marca-sep" aria-hidden="true"></span></div><div class="tanda"><span class="marca">HP</span><span class="marca-sep" aria-hidden="true"></span><span class="marca">Lenovo</span><span class="marca-sep" aria-hidden="true"></span><span class="marca">ASUS</span><span class="marca-sep" aria-hidden="true"></span><span class="marca">Acer</span><span class="marca-sep" aria-hidden="true"></span><span class="marca">MSI</span><span class="marca-sep" aria-hidden="true"></span><span class="marca">Dell</span><span class="marca-sep" aria-hidden="true"></span><span class="marca">Surface</span><span class="marca-sep" aria-hidden="true"></span><span class="marca">Intel</span><span class="marca-sep" aria-hidden="true"></span><span class="marca">AMD</span><span class="marca-sep" aria-hidden="true"></span><span class="marca">NVIDIA</span><span class="marca-sep" aria-hidden="true"></span></div></div>
+    </div>
     </div>
   </section>
 
