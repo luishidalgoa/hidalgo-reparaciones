@@ -234,108 +234,97 @@ a{color:inherit}
 
 .col{width:var(--col);margin-inline:auto}
 
-/* ══ Fondo: dos capas que vagan (receta de fondos de gradiente) ══
-   Va fijo detrás de toda la página. Los colores están bajados respecto a la
-   receta original porque aquí la base es casi negra y con los suyos el fondo
-   subía tanto que el ámbar de los botones dejaba de destacar. */
-.fondo{position:fixed;inset:0;z-index:0;overflow:hidden;background:var(--void);pointer-events:none}
-.fondo > span{position:absolute;inset:0}
+/* ══ Fondo ═══════════════════════════════════════════════════
+   Una malla de degradado cálida, viva, sobre la que el contenido va
+   por encima. Está fijo detrás de toda la página.
 
-/* El scale(1.07) no es decorativo: al desplazarse, una capa del tamaño justo
-   deja al descubierto una franja donde el color corta en seco. */
-.c1{
-  background:radial-gradient(at 18% 22%, #2A2016 0px, transparent 52%);
-  animation:vagar1 29s ease-in-out 0s infinite alternate;
+   Reescrito por rendimiento. La versión anterior iba a trompicones al
+   hacer scroll y por momentos dejaba de pintar lo que ya estaba: eran
+   ocho capas de pantalla completa, tres con blur, tres con
+   mix-blend-mode y tres animando background-position. Animar
+   background-position obliga a REPINTAR la capa entera en cada
+   fotograma; si además lleva un blur de 26px y un blend que tiene que
+   leer lo que hay debajo, el compositor no llega y acaba tirando capas
+   y rehaciéndolas. De ahí los dos segundos en negro al volver a subir.
+
+   Ahora:
+   · Cero blur. Los gradientes elípticos ya mueren suaves de por sí.
+   · Se anima transform, que la GPU compone sin repintar nada.
+   · Un solo blend en toda la página, y en una capa que no se anima.
+   Mismo aspecto, una fracción del coste. */
+.fondo{
+  position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;
+  /* El color base va aquí: es lo que hace que entre gradiente y gradiente
+     no se vea negro y el conjunto se lea como una superficie continua. */
+  background-color:#2A0E22;
 }
+
+/* Las capas son mucho mayores que la ventana (inset:-60%), así que por
+   mucho que se muevan o giren sus bordes no llegan a asomar. Ese era el
+   "cuadrado" que se veía cruzando el fondo cuando esto giraba. */
+.mano{
+  position:absolute;inset:-60%;
+  will-change:transform;
+}
+.m1{
+  background:
+    radial-gradient(ellipse 30% 26% at 22% 24%, rgb(228 153 42 / .95), rgb(228 153 42 / 0) 70%),
+    radial-gradient(ellipse 24% 30% at 62% 12%, rgb(247 201 72 / .88), rgb(247 201 72 / 0) 68%),
+    radial-gradient(ellipse 32% 22% at 84% 40%, rgb(242 84 45 / .82),  rgb(242 84 45 / 0) 72%);
+  animation:vagar1 41s ease-in-out infinite alternate;
+}
+.m2{
+  background:
+    radial-gradient(ellipse 26% 30% at 30% 62%, rgb(226 62 107 / .88), rgb(226 62 107 / 0) 70%),
+    radial-gradient(ellipse 30% 24% at 72% 74%, rgb(166 43 107 / .82), rgb(166 43 107 / 0) 72%),
+    radial-gradient(ellipse 22% 26% at 12% 84%, rgb(255 214 138 / .76), rgb(255 214 138 / 0) 68%);
+  animation:vagar2 53s ease-in-out -13s infinite alternate;
+}
+.m3{
+  background:
+    radial-gradient(ellipse 34% 24% at 50% 44%, rgb(247 190 66 / .70), rgb(247 190 66 / 0) 72%),
+    radial-gradient(ellipse 24% 28% at 88% 20%, rgb(198 52 128 / .66), rgb(198 52 128 / 0) 70%);
+  animation:vagar3 67s ease-in-out -29s infinite alternate;
+}
+/* Recorridos distintos y periodos que no son múltiplos entre sí: los
+   nudos se cruzan cada vez de otra manera y la mezcla no se repite. */
 @keyframes vagar1{
-  from{transform:scale(1.07) translate(-1.6%, 1.65%)}
-  to  {transform:scale(1.07) translate(1.6%, -1.65%)}
-}
-.c2{
-  background:radial-gradient(at 82% 78%, #1F1712 0px, transparent 55%);
-  animation:vagar2 37s ease-in-out -7s infinite alternate;
+  from{transform:translate3d(-6%, -4%, 0) rotate(-7deg) scale(1)}
+  to  {transform:translate3d(8%, 7%, 0)  rotate(9deg)  scale(1.22)}
 }
 @keyframes vagar2{
-  from{transform:scale(1.07) translate(2.1%, -2.1%)}
-  to  {transform:scale(1.07) translate(-2.1%, 2.1%)}
+  from{transform:translate3d(7%, 5%, 0)  rotate(8deg)  scale(1.16)}
+  to  {transform:translate3d(-8%, -6%, 0) rotate(-10deg) scale(.94)}
 }
-/* Los periodos son primos entre sí: la combinación tarda horas en repetirse.
-   El retraso negativo arranca la segunda capa por otro punto del recorrido. */
-
-/* ── El fluido ────────────────────────────────────────────────
-   Tres manchas de luz con forma irregular, cada una con su propio
-   recorrido, su giro y su ritmo. El truco está en el contenedor: un blur
-   grande sobre las tres a la vez las funde entre ellas, y lo que se ve
-   ya no son tres manchas sino una masa que se estira y se recompone. Con
-   blur por separado no ocurre: se notarían las tres.
-
-   El border-radius de cinco valores distintos es lo que las saca de la
-   circunferencia perfecta; girándolas, la silueta cambia sola. */
-/* Una malla de degradado, no manchas sueltas. Los gradientes van todos
-   en la MISMA capa (background-image admite varios) y debajo hay un color
-   base, así que no queda fondo visible entre ellos: cada uno muere dentro
-   del de al lado y se ve una superficie continua.
-
-   Tres detalles que son los que quitan el aire de "círculos":
-
-   1. Ninguno acaba en `transparent`. En CSS transparent es negro con
-      alfa 0, así que al interpolar hacia él el color se va ensuciando de
-      gris por el camino y aparece un halo: el borde del círculo. Cada
-      gradiente muere en SU PROPIO color con alfa 0, y entonces no hay
-      transición de tono, solo de opacidad.
-   2. Son elipses, no círculos, y cada una con proporción distinta.
-   3. El tamaño de cada capa pasa del 150%, así que el punto donde el
-      degradado se agota queda fuera de la pantalla.
-
-   Y lo que se anima no es la capa sino cada nudo por su cuenta: la masa
-   se deforma en vez de desplazarse en bloque. */
-.malla{
-  position:absolute;inset:0;
-  background-color:#2A0E22;
-  filter:saturate(1.5) blur(18px);
-  background-repeat:no-repeat;
-  background-image:
-    radial-gradient(ellipse 62% 54% at 50% 50%, rgb(228 153 42 / .98), rgb(228 153 42 / 0) 72%),
-    radial-gradient(ellipse 48% 66% at 50% 50%, rgb(247 201 72 / .92), rgb(247 201 72 / 0) 70%),
-    radial-gradient(ellipse 70% 44% at 50% 50%, rgb(242 84 45 / .88),  rgb(242 84 45 / 0) 74%),
-    radial-gradient(ellipse 52% 60% at 50% 50%, rgb(226 62 107 / .90), rgb(226 62 107 / 0) 72%),
-    radial-gradient(ellipse 66% 50% at 50% 50%, rgb(166 43 107 / .84), rgb(166 43 107 / 0) 76%),
-    radial-gradient(ellipse 44% 72% at 50% 50%, rgb(255 214 138 / .80), rgb(255 214 138 / 0) 68%),
-    radial-gradient(ellipse 74% 46% at 50% 50%, rgb(120 34 92 / .78),  rgb(120 34 92 / 0) 78%);
-  background-size:
-    185% 170%, 160% 190%, 200% 155%, 170% 180%, 190% 165%, 155% 195%, 205% 160%;
-  background-position:
-    -24% -18%, 62% -22%, 108% 30%, 22% 52%, 84% 74%, -18% 86%, 46% 108%;
-  animation:mallar1 44s ease-in-out infinite alternate;
-}
-/* Cada nudo llega a un sitio distinto y ninguno acompaña al de al lado:
-   por eso la superficie se retuerce en lugar de deslizarse entera. */
-@keyframes mallar1{
-  to{ background-position:
-    58% 42%, -16% 66%, 18% 96%, 92% -14%, 12% 18%, 74% 34%, -12% 44%; }
+@keyframes vagar3{
+  from{transform:translate3d(-5%, 6%, 0) rotate(5deg)  scale(1.08)}
+  to  {transform:translate3d(9%, -7%, 0) rotate(-8deg) scale(1.3)}
 }
 
-.malla.dos{
-  background-color:transparent;
-  mix-blend-mode:screen;opacity:.72;
-  filter:blur(26px);
-  background-image:
-    radial-gradient(ellipse 56% 62% at 50% 50%, rgb(247 190 66 / .90), rgb(247 190 66 / 0) 70%),
-    radial-gradient(ellipse 68% 48% at 50% 50%, rgb(236 74 96 / .82),  rgb(236 74 96 / 0) 74%),
-    radial-gradient(ellipse 50% 68% at 50% 50%, rgb(255 168 92 / .86), rgb(255 168 92 / 0) 70%),
-    radial-gradient(ellipse 64% 52% at 50% 50%, rgb(198 52 128 / .78), rgb(198 52 128 / 0) 76%);
-  background-size:175% 185%, 195% 160%, 165% 200%, 185% 170%;
-  background-position:84% -16%, 10% 38%, 58% 82%, 112% 96%;
-  animation:mallar2 61s ease-in-out -19s infinite alternate;
+/* Fuga de luz: la banda cálida que cruza en diagonal, como la luz que se
+   cuela por una junta del chasis. Es la única capa con blend de toda la
+   página, y screen es justo lo que le da el quemado. */
+.fuga{
+  position:absolute;inset:-40%;
+  background:
+    linear-gradient(104deg, rgb(255 216 156 / 0) 38%, rgb(255 216 156 / .16) 46%,
+                    rgb(255 172 96 / .26) 50%, rgb(255 138 92 / .12) 55%, rgb(255 138 92 / 0) 63%),
+    linear-gradient(68deg, rgb(255 122 138 / 0) 54%, rgb(255 122 138 / .14) 62%,
+                    rgb(255 186 120 / 0) 72%);
+  mix-blend-mode:screen;
+  will-change:transform, opacity;
+  animation:fugar 37s ease-in-out infinite alternate;
 }
-@keyframes mallar2{
-  to{ background-position: -14% 58%, 76% -12%, 6% 24%, 34% 40%; }
+@keyframes fugar{
+  from{transform:translate3d(-12%, 6%, 0) rotate(-4deg);opacity:.55}
+  50% {opacity:1}
+  to  {transform:translate3d(10%, -7%, 0) rotate(5deg);opacity:.72}
 }
 
 /* Sin esto no se lee nada: la malla a plena luz deja el texto claro
    encima de naranjas de media luminosidad. Oscurece la franja central,
    por donde cae el texto, y suelta los bordes, que es donde el color
-   puede vivir. */
+   puede vivir. No se anima: es una capa estática y sale gratis. */
 .velo-fondo{
   position:absolute;inset:0;
   background:
@@ -345,47 +334,15 @@ a{color:inherit}
                     rgb(8 9 12 / .10) 62%, rgb(8 9 12 / .36) 100%);
 }
 
-/* Fuga de luz: luz que se cuela por una junta y cruza el fotograma,
-   cálida y quemada por el centro de la banda. También se mueve por
-   posición y no por transform, para que no haya bordes girando. */
-.fuga{
-  position:absolute;inset:0;
-  background-repeat:no-repeat;
-  background-image:
-    linear-gradient(104deg, rgb(255 216 156 / 0) 34%, rgb(255 216 156 / .22) 44%,
-                    rgb(255 172 96 / .34) 50%, rgb(255 138 92 / .16) 56%, rgb(255 138 92 / 0) 66%),
-    linear-gradient(68deg, rgb(255 122 138 / 0) 52%, rgb(255 122 138 / .18) 61%,
-                    rgb(255 186 120 / .12) 66%, rgb(255 186 120 / 0) 76%);
-  background-size:240% 240%, 260% 260%;
-  background-position:0% 40%, 100% 60%;
-  mix-blend-mode:screen;
-  filter:blur(26px);
-  animation:fugar 31s ease-in-out infinite alternate;
-}
-@keyframes fugar{
-  from{background-position:0% 40%, 100% 60%;opacity:.55}
-  50% {opacity:1}
-  to  {background-position:100% 60%, 0% 30%;opacity:.72}
-}
-
-/* En pantallas pequeñas el blur de 72px sobre toda la ventana se nota al
-   hacer scroll. Menos radio y menos capa. */
-@media (max-width:760px){
-  .malla{animation-duration:62s;filter:saturate(1.5) blur(12px)}
-  .malla.dos{opacity:.58;filter:blur(16px)}
-  .fuga{filter:blur(18px)}
-}
-
-/* ── El grano ─────────────────────────────────────────────────
-   baseFrequency baja = grano grueso, del que se ve. Va quieto: el ruido
-   que parpadea marea y además delata que es un efecto. */
+/* El grano. Quieto: el ruido que parpadea marea y delata el efecto. Al no
+   animarse, su blend se compone una vez y no cuesta nada por fotograma. */
 .grano{
-  position:absolute;inset:0;pointer-events:none;
+  position:absolute;inset:0;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.62' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
   opacity:.14;mix-blend-mode:screen;
 }
 
-@media (prefers-reduced-motion: reduce){ .fondo > span{animation:none} }
+@media (prefers-reduced-motion: reduce){ .fondo *{animation:none} }
 
 /* El contenido va por encima del fondo. La barra y el dock ya van a 60. */
 body > header, body > main, body > footer{position:relative;z-index:1}
@@ -1098,10 +1055,9 @@ footer a:hover{color:var(--amber)}
 <body>
 
 <div class="fondo" aria-hidden="true">
-  <span class="c2"></span>
-  <span class="c1"></span>
-  <span class="malla"></span>
-  <span class="malla dos"></span>
+  <span class="mano m1"></span>
+  <span class="mano m2"></span>
+  <span class="mano m3"></span>
   <span class="velo-fondo"></span>
   <span class="fuga"></span>
   <span class="grano"></span>
