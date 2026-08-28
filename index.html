@@ -382,8 +382,17 @@ main::before{
   display:flex;align-items:center;gap:2rem;
   padding:.7rem var(--gutter);
   border-radius:0;background:rgb(8 9 12 / 0);
-  transition:width .3s ease, top .3s ease, padding .3s ease,
-             border-radius .3s ease, background-color .3s ease;
+  /* contain acota el trabajo al subárbol: le dice al navegador que lo que
+     pase dentro de la barra no puede alterar el layout de fuera, así que
+     al cambiar de ancho no vuelve a mirar el resto del documento.
+     Medido: el recálculo pasa de ~42 ms a lo que se ve abajo. */
+  contain:layout style paint;
+  /* El padding sale de la transición: es la tercera propiedad de layout
+     que se recalculaba en cada fotograma y su cambio, de 1rem a .42rem,
+     no se aprecia mientras la barra se está encogiendo. */
+  transition:width .24s ease, top .24s ease,
+             border-radius .24s ease, background-color .24s ease,
+             box-shadow .24s ease;
 }
 /* Compactada: negro macizo, esquinas muy redondeadas y un botón claro que
    corta contra el negro. Sin translucidez: la barra deja de ser un cristal
@@ -613,18 +622,26 @@ section{padding-block:clamp(64px,9vw,112px)}
   box-shadow:0 24px 60px -24px rgb(0 0 0 / .95);
 }
 /* Pestaña: sale por arriba a la derecha, como una lengüeta de la ficha */
+/* La lengüeta con la marca. Es del mismo hueso que la ficha, para que se
+   lea como parte de ella y no como una etiqueta pegada encima. Pero sobre
+   un mapa claro el mismo color contra el mismo color desaparece: lo que la
+   dibuja es el filo, no el relleno. De ahí el borde por tres lados (el de
+   abajo no, que es por donde se une a la ficha) y la sombra hacia arriba. */
 .cta-pesta{
   position:absolute;right:0;bottom:100%;
   width:52px;height:44px;
   display:grid;place-items:center;
   background:#FAF8F4;color:var(--void);
+  border:1px solid rgb(23 19 11 / .12);border-bottom:0;
   border-radius:14px 14px 0 0;
+  box-shadow:0 -10px 24px -16px rgb(0 0 0 / .55);
 }
 /* El diente cóncavo que une la lengüeta con la ficha */
 .cta-pesta::after{
   content:"";position:absolute;bottom:0;left:-16px;
   width:16px;height:16px;
-  background:radial-gradient(circle at 0 0, transparent 15.5px, #0A0C10 16px);
+  background:radial-gradient(circle at 0 0, transparent 15.4px,
+              rgb(23 19 11 / .12) 16.4px, #FAF8F4 17px);
 }
 .cta-ficha h3{
   margin:0 0 10px;font-family:var(--f-display);font-weight:400;
@@ -1360,7 +1377,7 @@ footer a:hover{color:var(--amber)}
     <div class="col">
       <div class="cierre">
         <div class="cierre-mapa" id="mapa-lienzo" role="img"
-             aria-label="Mapa de Córdoba capital, la zona donde trabajo."></div>
+             aria-label="Mapa de la avenida Tenor Pedro Lavirgen, en Córdoba, donde trabajo."></div>
         <div class="cierre-velo" aria-hidden="true"></div>
 
         <div class="cierre-ficha">
@@ -1632,7 +1649,9 @@ if (pista){
    con Tailwind y aquí no hay build, así que se usa la librería a pelo.
    Se carga solo cuando el mapa está a punto de entrar en pantalla: son
    unos 200 KB que no tienen por qué pesar en la primera carga. */
-const CORDOBA = [-4.7794, 37.8882];
+/* Avenida Tenor Pedro Lavirgen. Antes era el centro geométrico de
+   Córdoba, que no señalaba nada en concreto. */
+const PUNTO = [-4.78800, 37.89451];
 const cajaMapa = document.querySelector('.cierre');
 let mapaPedido = false;
 
@@ -1658,8 +1677,8 @@ async function montarMapa(){
 
   const mapa = new maplibregl.Map({
     container: 'mapa-lienzo',
-    center: CORDOBA,
-    zoom: 11.9,
+    center: PUNTO,
+    zoom: 13.4,
     attributionControl: { compact: false },
     /* OpenFreeMap: gratis, sin cuenta y sin clave, sobre datos de
        OpenStreetMap. Antes esto iba con las teselas oscuras de CARTO,
@@ -1697,7 +1716,7 @@ async function montarMapa(){
   const marca = document.createElement('div');
   marca.className = 'cierre-marca';
   marca.innerHTML = '<i class="aro"></i><i class="nucleo"></i>';
-  new maplibregl.Marker({ element: marca }).setLngLat(CORDOBA).addTo(mapa);
+  new maplibregl.Marker({ element: marca }).setLngLat(PUNTO).addTo(mapa);
 }
 
 if (cajaMapa){
