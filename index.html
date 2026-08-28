@@ -394,28 +394,30 @@ main::before{
      arriba y solo redondea por abajo. */
   top:0;padding:.5rem .42rem .55rem 1.05rem;
   border-radius:0 0 22px 22px;
-  background:#0A0C10;
-  /* Neón suave: un filo de un píxel y un halo corto hacia abajo. */
+  /* Claro: contra un fondo cálido y oscuro, el notch en hueso destaca
+     más que en negro, y de paso el logo ámbar deja de competir con él. */
+  background:#FAF8F4;
   box-shadow:
-    inset 0 0 0 1px rgb(232 163 61 / .22),
-    0 1px 18px -5px rgb(232 163 61 / .3),
-    0 10px 34px -12px rgb(0 0 0 / .85);
+    inset 0 0 0 1px rgb(23 19 11 / .10),
+    0 1px 18px -6px rgb(232 163 61 / .35),
+    0 12px 34px -14px rgb(0 0 0 / .6);
   backdrop-filter:none;
   gap:1.4rem;
 }
+.barra.encogida{color:var(--void)}
 .barra.encogida .barra-marca{font-family:var(--f-body);font-weight:600;font-size:16px;letter-spacing:-.01em}
 .barra.encogida .logo{
   width:30px;height:30px;padding:6px;border-radius:8px;
   background:var(--amber);color:var(--on-amber);
 }
 .barra.encogida .barra-nav{gap:1.35rem;font-size:13.5px}
-.barra.encogida .barra-nav a{opacity:1;color:#8E949E}
-.barra.encogida .barra-nav a:hover{color:#fff}
+.barra.encogida .barra-nav a{opacity:1;color:#5E5B57}
+.barra.encogida .barra-nav a:hover{color:var(--void)}
 .barra.encogida .barra-cta{
-  background:#F5F3EF;color:#0A0C10;
+  background:var(--void);color:#FAF8F4;
   padding:.6rem 1.15rem;border-radius:15px;font-weight:600;font-size:13.5px;
 }
-.barra.encogida .barra-cta:hover{background:#fff}
+.barra.encogida .barra-cta:hover{background:#1A1D24}
 /* El embudo: a cada lado del notch, un cuadrado del mismo negro al que se
    le recorta un cuarto de círculo. La curva sale cóncava y el notch parece
    tallado en el borde superior en vez de pegado encima. */
@@ -433,13 +435,13 @@ main::before{
 .barra.encogida::after{opacity:1}
 .barra::before{
   left:-20px;
-  background:radial-gradient(circle at 0 100%, transparent 19.4px, rgb(232 163 61 / .3) 20.4px, #0A0C10 21px);
+  background:radial-gradient(circle at 0 100%, transparent 19.4px, rgb(23 19 11 / .16) 20.4px, #FAF8F4 21px);
   -webkit-mask-image:radial-gradient(circle at 0 100%, transparent 19.5px, #000 20px);
   mask-image:radial-gradient(circle at 0 100%, transparent 19.5px, #000 20px);
 }
 .barra::after{
   right:-20px;
-  background:radial-gradient(circle at 100% 100%, transparent 19.4px, rgb(232 163 61 / .3) 20.4px, #0A0C10 21px);
+  background:radial-gradient(circle at 100% 100%, transparent 19.4px, rgb(23 19 11 / .16) 20.4px, #FAF8F4 21px);
   -webkit-mask-image:radial-gradient(circle at 100% 100%, transparent 19.5px, #000 20px);
   mask-image:radial-gradient(circle at 100% 100%, transparent 19.5px, #000 20px);
 }
@@ -615,7 +617,7 @@ section{padding-block:clamp(64px,9vw,112px)}
   position:absolute;right:0;bottom:100%;
   width:52px;height:44px;
   display:grid;place-items:center;
-  background:#0A0C10;color:var(--ink);
+  background:#FAF8F4;color:var(--void);
   border-radius:14px 14px 0 0;
 }
 /* El diente cóncavo que une la lengüeta con la ficha */
@@ -635,11 +637,11 @@ section{padding-block:clamp(64px,9vw,112px)}
 .cta-btn{
   display:inline-flex;align-items:center;gap:10px;
   padding:5px 5px 5px 17px;border-radius:999px;
-  background:#F5F3EF;color:#0A0C10;text-decoration:none;
+  background:var(--void);color:#FAF8F4;text-decoration:none;
   font-weight:600;font-size:13.5px;
   transition:background-color .16s ease;
 }
-.cta-btn:hover{background:#fff}
+.cta-btn:hover{background:#1A1D24}
 .cta-btn i{
   width:30px;height:30px;flex:none;border-radius:50%;
   background:var(--amber);color:var(--on-amber);
@@ -874,7 +876,9 @@ section{padding-block:clamp(64px,9vw,112px)}
 
 
 /* Contacto */
-.contacto{background:var(--panel);border-top:1px solid var(--edge)}
+/* Sin fondo propio: la seccion deja pasar la malla del fondo, que es
+   lo que la separa del resto sin necesidad de pintarla de negro. */
+.contacto{background:transparent;border-top:1px solid var(--edge)}
 
 
 /* ══ Cierre: el contacto entero es la llamada a la acción ═══
@@ -882,40 +886,47 @@ section{padding-block:clamp(64px,9vw,112px)}
    misma mesa habría sido lo más soso posible. */
 .cierre{
   position:relative;overflow:hidden;
-  border:1px solid var(--edge);border-radius:18px;
-  background:#0A0C10;
+  border:1px solid rgb(23 19 11 / .18);border-radius:18px;
+  background:#F2EFE9;
 }
 /* El lienzo del mapa va EN FLUJO y con alto real. Con position:absolute
    MapLibre lo medía a cero al montarse y no pintaba nunca. */
 .cierre-mapa{
   position:relative;z-index:0;
   width:100%;height:clamp(520px,46vw,600px);
-  background:radial-gradient(70% 70% at 62% 45%, #171C24 0%, #0C0F14 100%);
+  background:radial-gradient(70% 70% at 62% 45%, #F2EFE9 0%, #E4DFD6 100%);
 }
+/* Positron: el estilo claro de OpenFreeMap. El oscuro dejaba las calles
+   casi indistinguibles del fondo, y encima la sección entera pedía luz.
+   El punto de sepia arrima el gris del mapa al ámbar de la página. */
+.cierre-mapa canvas{ filter:sepia(.10) saturate(.94); }
 /* El velo aparta el mapa de debajo del texto sin apagarlo del todo */
 .cierre-velo{
   position:absolute;inset:0;z-index:1;pointer-events:none;
+  /* El velo se aclara con la sección: si sigue tirando a negro, deja un
+     halo sucio entre el mapa claro y la ficha. */
   background:
-    linear-gradient(100deg, #0A0C10 0%, rgb(10 12 16 / .9) 28%, rgb(10 12 16 / .3) 56%, transparent 80%),
-    linear-gradient(to top, rgb(10 12 16 / .75) 0%, transparent 42%);
+    linear-gradient(100deg, rgb(250 248 244 / .92) 0%, rgb(250 248 244 / .70) 28%,
+                    rgb(250 248 244 / .22) 56%, transparent 80%),
+    linear-gradient(to top, rgb(244 240 234 / .55) 0%, transparent 42%);
 }
 .cierre-ficha{
   position:absolute;z-index:2;
   left:clamp(16px,2.4vw,28px);bottom:clamp(16px,2.4vw,28px);
   width:min(440px,calc(100% - clamp(32px,4.8vw,56px)));
   padding:28px 28px 26px;
-  background:#0A0C10;border-radius:16px;
-  box-shadow:0 26px 64px -26px rgb(0 0 0 / .95), inset 0 0 0 1px rgb(255 255 255 / .05);
+  background:#FAF8F4;color:var(--void);border-radius:16px;
+  box-shadow:0 26px 64px -26px rgb(0 0 0 / .55), inset 0 0 0 1px rgb(23 19 11 / .10);
 }
 /* En estrecho la ficha no cabe encima: baja al flujo, bajo el mapa. */
 @media (max-width:820px){
   .cta-pesta{display:none}
   .cierre-mapa{height:300px}
-  .cierre-velo{background:linear-gradient(to top, #0A0C10 0%, rgb(10 12 16 / .55) 40%, transparent 100%)}
+  .cierre-velo{background:linear-gradient(to top, rgb(250 248 244 / .92) 0%, rgb(250 248 244 / .45) 40%, transparent 100%)}
   .cierre-ficha{
     position:static;width:100%;
     border-radius:0;box-shadow:none;
-    padding:26px 22px 24px;border-top:1px solid var(--edge);
+    padding:26px 22px 24px;border-top:1px solid rgb(23 19 11 / .12);
   }
 }
 .cierre-ficha h2{
@@ -923,31 +934,31 @@ section{padding-block:clamp(64px,9vw,112px)}
   font-size:clamp(1.8rem,4vw,2.4rem);line-height:1.08;letter-spacing:-.015em;
   text-wrap:balance;
 }
-.cierre-txt{margin:0 0 22px;color:var(--ink-2);font-size:.98rem}
-.cierre-pie{margin:16px 0 0;font-size:.86rem;line-height:1.55;color:var(--ink-3)}
+.cierre-txt{margin:0 0 22px;color:#4A453D;font-size:.98rem}
+.cierre-pie{margin:16px 0 0;font-size:.86rem;line-height:1.55;color:#6B655C}
 .cierre-pie + .cierre-pie{margin-top:6px}
-.cierre-pie a{color:var(--ink-2);font-family:var(--f-mono);font-size:.82rem;
-  text-decoration:none;border-bottom:1px solid var(--edge);padding-bottom:1px}
-.cierre-pie a:hover{color:var(--amber);border-color:var(--amber-deep)}
+.cierre-pie a{color:#2A2620;font-family:var(--f-mono);font-size:.82rem;
+  text-decoration:none;border-bottom:1px solid rgb(23 19 11 / .28);padding-bottom:1px}
+.cierre-pie a:hover{color:var(--amber-deep);border-color:var(--amber-deep)}
 
 /* Controles de cristal: el blanco de fábrica de MapLibre rompe la página */
 .cierre .maplibregl-ctrl-group{
-  background:rgb(14 18 24 / .5) !important;
-  backdrop-filter:blur(14px) saturate(1.4);
-  -webkit-backdrop-filter:blur(14px) saturate(1.4);
-  border:1px solid rgb(255 255 255 / .14);
+  background:rgb(250 248 244 / .82) !important;
+  backdrop-filter:blur(10px) saturate(1.2);
+  -webkit-backdrop-filter:blur(10px) saturate(1.2);
+  border:1px solid rgb(23 19 11 / .14);
   border-radius:11px !important;overflow:hidden;
-  box-shadow:0 8px 24px -10px rgb(0 0 0 / .9), inset 0 1px 0 rgb(255 255 255 / .08);
+  box-shadow:0 8px 24px -12px rgb(0 0 0 / .45), inset 0 1px 0 rgb(255 255 255 / .6);
 }
 .cierre .maplibregl-ctrl-group button{
   background:transparent !important;width:32px;height:32px;
   transition:background-color .15s ease;
 }
-.cierre .maplibregl-ctrl-group button + button{border-top:1px solid rgb(255 255 255 / .1)}
-.cierre .maplibregl-ctrl-group button:hover{background:rgb(255 255 255 / .09) !important}
+.cierre .maplibregl-ctrl-group button + button{border-top:1px solid rgb(23 19 11 / .12)}
+.cierre .maplibregl-ctrl-group button:hover{background:rgb(23 19 11 / .07) !important}
 /* Los iconos vienen como SVG negro en background-image */
-.cierre .maplibregl-ctrl-icon{filter:invert(1) opacity(.72)}
-.cierre .maplibregl-ctrl-group button:hover .maplibregl-ctrl-icon{filter:invert(1) opacity(1)}
+.cierre .maplibregl-ctrl-icon{filter:opacity(.66)}
+.cierre .maplibregl-ctrl-group button:hover .maplibregl-ctrl-icon{filter:opacity(1)}
 
 .cierre .maplibregl-ctrl-attrib{
   background:rgb(14 18 24 / .5) !important;
@@ -1024,9 +1035,10 @@ section{padding-block:clamp(64px,9vw,112px)}
 footer{padding:26px 0 34px;border-top:1px solid var(--edge)}
 footer p{
   margin:0;display:flex;gap:10px 22px;flex-wrap:wrap;align-items:baseline;
-  font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;color:var(--ink-3);
+  /* Estaba en ink-3 y sobre el fondo cálido no se leía. */
+  font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;color:#A9A49B;
 }
-footer a{color:var(--ink-2);text-decoration:none;margin-left:auto}
+footer a{color:#D6D1C8;text-decoration:none;margin-left:auto}
 footer a:hover{color:var(--amber)}
 
 /* Dock móvil */
@@ -1649,20 +1661,12 @@ async function montarMapa(){
     center: CORDOBA,
     zoom: 11.9,
     attributionControl: { compact: false },
-    style: {
-      version: 8,
-      sources: {
-        carto: {
-          type: 'raster',
-          tiles: ['https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png',
-                  'https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png',
-                  'https://c.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png'],
-          tileSize: 256, maxzoom: 19,
-          attribution: '© OpenStreetMap · © CARTO'
-        }
-      },
-      layers: [{ id: 'base', type: 'raster', source: 'carto' }]
-    }
+    /* OpenFreeMap: gratis, sin cuenta y sin clave, sobre datos de
+       OpenStreetMap. Antes esto iba con las teselas oscuras de CARTO,
+       que pasaron a exigir API key y desde entonces no devolvian un
+       error sino una imagen con el cartel "API KEY REQUIRED" impreso:
+       el mapa cargaba de maravilla y salia estampado de carteles. */
+    style: 'https://tiles.openfreemap.org/styles/positron' 
   });
 
   mapa.scrollZoom.disable();          // que la rueda siga bajando por la página
